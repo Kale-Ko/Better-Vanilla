@@ -30,19 +30,28 @@
         ],
         "client": [],
         "server": [],
-        "modmenu": []
+        "modmenu": [
+            "com.kale_ko.better_vanilla.config.ConfigMenu"
+        ]
     },
     "mixins": [
         "better-vanilla.mixins.json"
     ],
+    "jars": [
+        {
+            "file": "META-INF/jars/modmenu-2.0.14.jar"
+        },
+        {
+            "file": "META-INF/jars/cloth-config-5.0.38-fabric.jar"
+        }
+    ],
     "depends": {
+        "java": ">=16",
+        "minecraft": "1.17.x",
         "fabricloader": ">=0.12.5",
         "fabric": ">=0.42.1",
-        "minecraft": "1.17.x",
-        "java": ">=16"
-    },
-    "recommends": {
-        "modmenu": ">=2.0.14"
+        "modmenu": ">=2.0.14",
+        "cloth-config2": ">=5.0.38"
     },
     "custom": {
         "modmenu": {
