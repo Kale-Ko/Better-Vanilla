@@ -4,7 +4,11 @@
     "package": "com.kale_ko.better_vanilla.mixins",
     "compatibilityLevel": "JAVA_16",
     "mixins": [],
-    "client": [],
+    "client": [
+        "RemoveModdedWindowNotice",
+        "RemoveModdedTitleScreenNotice",
+        "Creeper"
+    ],
     "server": [],
     "injectors": {
         "defaultRequire": 1
