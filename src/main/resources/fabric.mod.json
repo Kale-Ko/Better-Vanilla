@@ -4,7 +4,7 @@
     "id": "better-vanilla",
     "version": "${version}",
     "description": "A mod to make the game a bit cooler and more sensible",
-    "icon": {
+    "icons": {
         "256": "assets/better-vanilla/icon256.png",
         "128": "assets/better-vanilla/icon128.png",
         "64": "assets/better-vanilla/icon64.png"
@@ -43,11 +43,15 @@
         "fabricloader": ">=0.12.5",
         "fabric": ">=0.42.1",
         "minecraft": "1.17.x",
-        "java": ">=16",
-        "modmenu": "2.0.14"
+        "java": ">=16"
+    },
+    "recommends": {
+        "modmenu": ">=2.0.14"
     },
     "jars": [
-        "jars/Modmenu.jar"
+        {
+            "file": "jars/Modmenu.jar"
+        }
     ],
     "custom": {
         "modmenu": {
