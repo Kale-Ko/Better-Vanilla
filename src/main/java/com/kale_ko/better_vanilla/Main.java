@@ -10,5 +10,7 @@ public class Main implements ModInitializer {
     @Override
     public void onInitialize() {
         Console.info("Better vanilla is loading..");
+
+        Console.info("Better vanilla has loaded!");
     }
 }
