@@ -4,11 +4,7 @@
     "id": "better-vanilla",
     "version": "1.0.0",
     "description": "A mod to make the game a bit cooler and more sensible",
-    "icons": {
-        "256": "/assets/better-vanilla/icons/icon-256.png",
-        "128": "/assets/better-vanilla/icons/icon-128.png",
-        "64": "/assets/better-vanilla/icons/icon-64.png"
-    },
+    "icons": "/assets/better-vanilla/icons/icon.png",
     "authors": [
         {
             "name": "Kale-Ko",
