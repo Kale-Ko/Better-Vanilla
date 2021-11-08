@@ -2,12 +2,12 @@
     "schemaVersion": 1,
     "name": "Better Vanilla",
     "id": "better-vanilla",
-    "version": "${version}",
+    "version": "1.0.0",
     "description": "A mod to make the game a bit cooler and more sensible",
     "icons": {
-        "256": "assets/better-vanilla/icon256.png",
-        "128": "assets/better-vanilla/icon128.png",
-        "64": "assets/better-vanilla/icon64.png"
+        "256": "/assets/better-vanilla/icons/icon-256.png",
+        "128": "/assets/better-vanilla/icons/icon-128.png",
+        "64": "/assets/better-vanilla/icons/icon-64.png"
     },
     "authors": [
         {
@@ -48,11 +48,6 @@
     "recommends": {
         "modmenu": ">=2.0.14"
     },
-    "jars": [
-        {
-            "file": "jars/Modmenu.jar"
-        }
-    ],
     "custom": {
         "modmenu": {
             "links": {
