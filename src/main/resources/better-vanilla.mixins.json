@@ -3,13 +3,13 @@
     "minVersion": "0.8",
     "package": "com.kale_ko.better_vanilla.mixins",
     "compatibilityLevel": "JAVA_16",
-    "mixins": [],
+    "mixins": [
+        "Creeper"
+    ],
     "client": [
         "RemoveModdedNotice"
     ],
-    "server": [
-        "Creeper"
-    ],
+    "server": [],
     "injectors": {
         "defaultRequire": 1
     }
