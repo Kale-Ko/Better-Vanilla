@@ -27,11 +27,11 @@ public class Creeper {
     public void tick(CallbackInfo info) {
         if (((CreeperEntity) ((Object) this)).isAlive()) {
             if (Main.config.creepers_ignite_from_fire && ((CreeperEntity) ((Object) this)).isOnFire()) {
-                ((CreeperEntity) ((Object) this)).ignite();
+                ((CreeperEntity) ((Object) this)).setFuseSpeed(1);
             }
 
             if (Main.config.creepers_defuse_in_water && ((CreeperEntity) ((Object) this)).isTouchingWaterOrRain()) {
-                ((CreeperEntity) ((Object) this)).getDataTracker().set(Creeper.getIGNITED(), false);
+                ((CreeperEntity) ((Object) this)).setFuseSpeed(-1);
             }
         }
     }
