@@ -1,4 +1,5 @@
 {
+    "better_vanilla.config.title": "Better Vanilla Config",
     "better_vanilla.config.no_modded_info.title": "No modded info",
     "better_vanilla.config.no_modded_info.description": "Remove the \"(Modded)\" text from the title screen and \"*\" from the window title",
     "better_vanilla.config.creepers_ignite_from_fire.title": "Creepers ignite when on fire",
