@@ -1,5 +1,6 @@
 package com.kale_ko.better_vanilla.mixins;
 
+import com.kale_ko.better_vanilla.Main;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,11 +19,11 @@ public class Creeper {
     @Inject(at = @At("HEAD"), method = "tick()V")
     public void tick(CallbackInfo info) {
         if (((CreeperEntity) ((Object) this)).isAlive()) {
-            if (((CreeperEntity) ((Object) this)).isOnFire()) {
+            if (Main.config.creepers_ignite_from_fire && ((CreeperEntity) ((Object) this)).isOnFire()) {
                 ((CreeperEntity) ((Object) this)).ignite();
             }
 
-            if (((CreeperEntity) ((Object) this)).isTouchingWaterOrRain()) {
+            if (Main.config.creepers_defuse_in_water && ((CreeperEntity) ((Object) this)).isTouchingWaterOrRain()) {
                 ((CreeperEntity) ((Object) this)).getDataTracker().set(Creeper.getIGNITED(), false);
             }
         }

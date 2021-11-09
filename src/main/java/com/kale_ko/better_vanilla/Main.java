@@ -13,6 +13,8 @@ public class Main implements ModInitializer {
     public void onInitialize() {
         Console.info("Better vanilla is loading..");
 
+        config.load();
+
         Console.info("Better vanilla has loaded!");
     }
 }
