@@ -4,7 +4,9 @@
     "package": "com.kale_ko.better_vanilla.mixins",
     "compatibilityLevel": "JAVA_16",
     "mixins": [
-        "Creeper"
+        "Creeper",
+        "CreeperIgniteGoalAccessor",
+        "CreeperIgniteDefuse"
     ],
     "client": [
         "RemoveModdedNotice"
