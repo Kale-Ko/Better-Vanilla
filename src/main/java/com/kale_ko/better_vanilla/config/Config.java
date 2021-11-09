@@ -14,7 +14,7 @@ import java.io.IOException;
 public class Config {
     public static final File configFile = FabricLoader.getInstance().getConfigDir().resolve("better_vanilla.config").toFile();
 
-    public boolean no_modded_info = true;
+    public boolean remove_modded_notice = true;
 
     public boolean creepers_ignite_from_fire = true;
     public boolean creepers_defuse_in_water = true;
@@ -22,7 +22,7 @@ public class Config {
     public void save() {
         String data = "";
 
-        data += "no_modded_info=" + no_modded_info + "\n";
+        data += "remove_modded_notice=" + remove_modded_notice + "\n";
         data += "creepers_ignite_from_fire=" + creepers_ignite_from_fire + "\n";
         data += "creepers_defuse_in_water=" + creepers_defuse_in_water + "\n";
 
@@ -64,8 +64,8 @@ public class Config {
             for (String line : lines) {
                 String[] keyValue = line.split("=");
 
-                if (keyValue[0].equals("no_modded_info")) {
-                    no_modded_info = Boolean.parseBoolean(keyValue[1]);
+                if (keyValue[0].equals("remove_modded_notice")) {
+                    remove_modded_notice = Boolean.parseBoolean(keyValue[1]);
                 } else if (keyValue[0].equals("creepers_ignite_from_fire")) {
                     creepers_ignite_from_fire = Boolean.parseBoolean(keyValue[1]);
                 } else if (keyValue[0].equals("creepers_defuse_in_water")) {
@@ -84,10 +84,10 @@ public class Config {
 
         ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("better_vanilla.config.general"));
 
-        BooleanListEntry no_modded_info_entry = builder.entryBuilder()
-                .startBooleanToggle(new TranslatableText("better_vanilla.config.no_modded_info.title"), no_modded_info)
+        BooleanListEntry remove_modded_notice_entry = builder.entryBuilder()
+                .startBooleanToggle(new TranslatableText("better_vanilla.config.remove_modded_notice.title"), remove_modded_notice)
                 .setDefaultValue(true)
-                .setTooltip(new TranslatableText("better_vanilla.config.no_modded_info.description"))
+                .setTooltip(new TranslatableText("better_vanilla.config.remove_modded_notice.description"))
                 .build();
 
         BooleanListEntry creepers_ignite_from_fire_entry = builder.entryBuilder()
@@ -102,12 +102,12 @@ public class Config {
                 .setTooltip(new TranslatableText("better_vanilla.config.creepers_defuse_in_water.description"))
                 .build();
 
-        general.addEntry(no_modded_info_entry);
+        general.addEntry(remove_modded_notice_entry);
         general.addEntry(creepers_ignite_from_fire_entry);
         general.addEntry(creepers_defuse_in_water_entry);
 
         builder.setSavingRunnable(() -> {
-            no_modded_info = no_modded_info_entry.getValue();
+            remove_modded_notice = remove_modded_notice_entry.getValue();
             creepers_ignite_from_fire = creepers_ignite_from_fire_entry.getValue();
             creepers_defuse_in_water = creepers_defuse_in_water_entry.getValue();
 
