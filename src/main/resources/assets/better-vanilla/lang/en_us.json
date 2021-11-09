@@ -7,5 +7,7 @@
     "better_vanilla.config.creepers_defuse_in_water.title": "Creepers defuse when in water",
     "better_vanilla.config.creepers_defuse_in_water.description": "Makes creepers stop exploding when they are in water",
     "better_vanilla.config.infinity_plus_mending.title": "Infinity Plus Mending",
-    "better_vanilla.config.infinity_plus_mending.description": "Makes the infinity and mending enchantments work together"
+    "better_vanilla.config.infinity_plus_mending.description": "Makes the infinity and mending enchantments work together",
+    "better_vanilla.config.bookshelves_hold_books.title": "Bookshelves Hold Books",
+    "better_vanilla.config.bookshelves_hold_books.description": "Make bookshelves store books that you can take and put back"
 }
