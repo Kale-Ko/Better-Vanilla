@@ -19,6 +19,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Config {
+    public static final String version = "1";
+
     public static final File configFile = FabricLoader.getInstance().getConfigDir().resolve("better_vanilla.config").toFile();
 
     public boolean remove_modded_notice = true;
@@ -26,12 +28,15 @@ public class Config {
     public boolean creepers_ignite_from_fire = true;
     public boolean creepers_defuse_in_water = true;
 
+    public boolean infinity_plus_mending = true;
+
     public void save() {
-        String data = "";
+        String data = "version=" + version + "\n";
 
         data += "remove_modded_notice=" + remove_modded_notice + "\n";
         data += "creepers_ignite_from_fire=" + creepers_ignite_from_fire + "\n";
         data += "creepers_defuse_in_water=" + creepers_defuse_in_water + "\n";
+        data += "infinity_plus_mending=" + infinity_plus_mending + "\n";
 
         try {
             FileWriter configWriter = new FileWriter(configFile);
@@ -77,6 +82,8 @@ public class Config {
                     creepers_ignite_from_fire = Boolean.parseBoolean(keyValue[1]);
                 } else if (keyValue[0].equals("creepers_defuse_in_water")) {
                     creepers_defuse_in_water = Boolean.parseBoolean(keyValue[1]);
+                } else if (keyValue[0].equals("infinity_plus_mending")) {
+                    infinity_plus_mending = Boolean.parseBoolean(keyValue[1]);
                 }
             }
         } catch (Exception err) {
@@ -85,9 +92,7 @@ public class Config {
     }
 
     public ConfigBuilder buildMenu() {
-        ConfigBuilder builder = ConfigBuilder.create()
-                .setTitle(new TranslatableText("better_vanilla.config.title"));
-                // .setDefaultBackgroundTexture(arg0);
+        ConfigBuilder builder = ConfigBuilder.create().setTitle(new TranslatableText("better_vanilla.config.title"));
 
         ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("better_vanilla.config.general"));
 
@@ -109,14 +114,22 @@ public class Config {
                 .setTooltip(new TranslatableText("better_vanilla.config.creepers_defuse_in_water.description"))
                 .build();
 
+        BooleanListEntry infinity_plus_mending_entry = builder.entryBuilder()
+                .startBooleanToggle(new TranslatableText("better_vanilla.config.infinity_plus_mending.title"), infinity_plus_mending)
+                .setDefaultValue(true)
+                .setTooltip(new TranslatableText("better_vanilla.config.infinity_plus_mending.description"))
+                .build();
+
         general.addEntry(remove_modded_notice_entry);
         general.addEntry(creepers_ignite_from_fire_entry);
         general.addEntry(creepers_defuse_in_water_entry);
+        general.addEntry(infinity_plus_mending_entry);
 
         builder.setSavingRunnable(() -> {
             remove_modded_notice = remove_modded_notice_entry.getValue();
             creepers_ignite_from_fire = creepers_ignite_from_fire_entry.getValue();
             creepers_defuse_in_water = creepers_defuse_in_water_entry.getValue();
+            infinity_plus_mending = infinity_plus_mending_entry.getValue();
 
             save();
         });

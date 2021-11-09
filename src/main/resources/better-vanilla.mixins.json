@@ -6,7 +6,8 @@
     "mixins": [
         "Creeper",
         "CreeperIgniteGoalAccessor",
-        "CreeperIgniteDefuse"
+        "CreeperIgniteDefuse",
+        "InfinityPlusMending"
     ],
     "client": [
         "RemoveModdedNotice"
