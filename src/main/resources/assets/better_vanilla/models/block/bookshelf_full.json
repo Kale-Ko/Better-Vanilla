@@ -1,0 +1,7 @@
+{
+    "parent": "minecraft:block/cube_column",
+    "textures": {
+        "end": "better_vanilla:block/oak_planks",
+        "side": "better_vanilla:block/bookshelf_full"
+    }
+}

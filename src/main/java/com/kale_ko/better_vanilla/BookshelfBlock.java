@@ -29,7 +29,9 @@ public class BookshelfBlock extends Block {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!Main.config.bookshelves_hold_books) return ActionResult.FAIL;
+        if (!Main.config.bookshelves_hold_books) {
+            return ActionResult.FAIL;
+        }
 
         if (state.get(BOOKS) > 0 && player.getInventory().getMainHandStack().isEmpty()) {
             if (player.getInventory().getOccupiedSlotWithRoomForStack(Items.BOOK.getDefaultStack()) == -1) {
