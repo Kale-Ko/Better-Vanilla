@@ -30,7 +30,7 @@ public class Main implements ModInitializer {
 
         config.load();
 
-        if (true) {
+        if (!config.disable_custom_bookshelves) {
             Block bookshelf = new BookshelfBlock(AbstractBlock.Settings.of(Material.WOOD).strength(1.5F).sounds(BlockSoundGroup.WOOD));
             Registry.register(Registry.BLOCK, 144, "bookshelf", bookshelf);
 
