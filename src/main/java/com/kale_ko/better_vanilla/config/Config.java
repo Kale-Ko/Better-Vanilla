@@ -31,6 +31,7 @@ public class Config {
     public boolean infinity_plus_mending = true;
 
     public boolean bookshelves_hold_books = true;
+    public boolean disable_custom_bookshelves = true;
 
     public void save() {
         String data = "version=" + version + "\n";
@@ -40,6 +41,7 @@ public class Config {
         data += "creepers_defuse_in_water=" + creepers_defuse_in_water + "\n";
         data += "infinity_plus_mending=" + infinity_plus_mending + "\n";
         data += "bookshelves_hold_books=" + bookshelves_hold_books + "\n";
+        data += "disable_custom_bookshelves=" + disable_custom_bookshelves + "\n";
 
         try {
             FileWriter configWriter = new FileWriter(configFile);
@@ -89,6 +91,8 @@ public class Config {
                     infinity_plus_mending = Boolean.parseBoolean(keyValue[1]);
                 } else if (keyValue[0].equals("bookshelves_hold_books")) {
                     bookshelves_hold_books = Boolean.parseBoolean(keyValue[1]);
+                } else if (keyValue[0].equals("disable_custom_bookshelves")) {
+                    disable_custom_bookshelves = Boolean.parseBoolean(keyValue[1]);
                 }
             }
         } catch (Exception err) {
@@ -100,6 +104,7 @@ public class Config {
         ConfigBuilder builder = ConfigBuilder.create().setTitle(new TranslatableText("better_vanilla.config.title"));
 
         ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("better_vanilla.config.general"));
+        ConfigCategory advanced = builder.getOrCreateCategory(new TranslatableText("better_vanilla.config.advanced"));
 
         BooleanListEntry remove_modded_notice_entry = builder.entryBuilder()
                 .startBooleanToggle(new TranslatableText("better_vanilla.config.remove_modded_notice.title"), remove_modded_notice)
@@ -130,19 +135,28 @@ public class Config {
                 .setDefaultValue(true)
                 .setTooltip(new TranslatableText("better_vanilla.config.bookshelves_hold_books.description"))
                 .build();
+                
+        BooleanListEntry disable_custom_bookshelves_entry = builder.entryBuilder()
+                .startBooleanToggle(new TranslatableText("better_vanilla.config.disable_custom_bookshelves.title"), disable_custom_bookshelves)
+                .setDefaultValue(true)
+                .setTooltip(new TranslatableText("better_vanilla.config.disable_custom_bookshelves.description"))
+                .build();
 
         general.addEntry(remove_modded_notice_entry);
         general.addEntry(creepers_ignite_from_fire_entry);
         general.addEntry(creepers_defuse_in_water_entry);
         general.addEntry(infinity_plus_mending_entry);
         general.addEntry(bookshelves_hold_books_entry);
+        advanced.addEntry(disable_custom_bookshelves_entry);
 
+        builder.setFallbackCategory(general);
         builder.setSavingRunnable(() -> {
             remove_modded_notice = remove_modded_notice_entry.getValue();
             creepers_ignite_from_fire = creepers_ignite_from_fire_entry.getValue();
             creepers_defuse_in_water = creepers_defuse_in_water_entry.getValue();
             infinity_plus_mending = infinity_plus_mending_entry.getValue();
             bookshelves_hold_books = bookshelves_hold_books_entry.getValue();
+            disable_custom_bookshelves = disable_custom_bookshelves_entry.getValue();
 
             save();
         });
