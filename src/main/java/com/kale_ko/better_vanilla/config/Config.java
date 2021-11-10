@@ -99,7 +99,7 @@ public class Config {
             Main.Console.error("Failed to parse config");
         }
     }
-    
+
     public ConfigBuilder buildMenu() {
         ConfigBuilder builder = ConfigBuilder.create().setTitle(new TranslatableText("better_vanilla.config.title"));
 
@@ -150,7 +150,7 @@ public class Config {
                     return new TranslatableText("better_vanilla.config.value." + value.toString());
                 })
                 .build();
-                
+
         BooleanListEntry disable_custom_bookshelves_entry = builder.entryBuilder()
                 .startBooleanToggle(new TranslatableText("better_vanilla.config.option.disable_custom_bookshelves.title"), disable_custom_bookshelves)
                 .setDefaultValue(false)
