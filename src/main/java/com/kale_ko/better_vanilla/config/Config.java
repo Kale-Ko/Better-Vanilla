@@ -31,7 +31,7 @@ public class Config {
     public boolean infinity_plus_mending = true;
 
     public boolean bookshelves_hold_books = true;
-    public boolean disable_custom_bookshelves = true;
+    public boolean disable_custom_bookshelves = false;
 
     public void save() {
         String data = "version=" + version + "\n";
@@ -99,47 +99,66 @@ public class Config {
             Main.Console.error("Failed to parse config");
         }
     }
-
+    
     public ConfigBuilder buildMenu() {
         ConfigBuilder builder = ConfigBuilder.create().setTitle(new TranslatableText("better_vanilla.config.title"));
 
-        ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("better_vanilla.config.general"));
-        ConfigCategory advanced = builder.getOrCreateCategory(new TranslatableText("better_vanilla.config.advanced"));
+        ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("better_vanilla.config.category.general"));
+        ConfigCategory advanced = builder.getOrCreateCategory(new TranslatableText("better_vanilla.config.category.advanced"));
 
         BooleanListEntry remove_modded_notice_entry = builder.entryBuilder()
-                .startBooleanToggle(new TranslatableText("better_vanilla.config.remove_modded_notice.title"), remove_modded_notice)
+                .startBooleanToggle(new TranslatableText("better_vanilla.config.option.remove_modded_notice.title"), remove_modded_notice)
                 .setDefaultValue(true)
-                .setTooltip(new TranslatableText("better_vanilla.config.remove_modded_notice.description"))
+                .setTooltip(new TranslatableText("better_vanilla.config.option.remove_modded_notice.description"))
+                .setYesNoTextSupplier((Boolean value) -> {
+                    return new TranslatableText("better_vanilla.config.value." + value.toString());
+                })
                 .build();
 
         BooleanListEntry creepers_ignite_from_fire_entry = builder.entryBuilder()
-                .startBooleanToggle(new TranslatableText("better_vanilla.config.creepers_ignite_from_fire.title"), creepers_ignite_from_fire)
+                .startBooleanToggle(new TranslatableText("better_vanilla.config.option.creepers_ignite_from_fire.title"), creepers_ignite_from_fire)
                 .setDefaultValue(true)
-                .setTooltip(new TranslatableText("better_vanilla.config.creepers_ignite_from_fire.description"))
+                .setTooltip(new TranslatableText("better_vanilla.config.option.creepers_ignite_from_fire.description"))
+                .setYesNoTextSupplier((Boolean value) -> {
+                    return new TranslatableText("better_vanilla.config.value." + value.toString());
+                })
                 .build();
 
         BooleanListEntry creepers_defuse_in_water_entry = builder.entryBuilder()
-                .startBooleanToggle(new TranslatableText("better_vanilla.config.creepers_defuse_in_water.title"), creepers_defuse_in_water)
+                .startBooleanToggle(new TranslatableText("better_vanilla.config.option.creepers_defuse_in_water.title"), creepers_defuse_in_water)
                 .setDefaultValue(true)
-                .setTooltip(new TranslatableText("better_vanilla.config.creepers_defuse_in_water.description"))
+                .setTooltip(new TranslatableText("better_vanilla.config.option.creepers_defuse_in_water.description"))
+                .setYesNoTextSupplier((Boolean value) -> {
+                    return new TranslatableText("better_vanilla.config.value." + value.toString());
+                })
                 .build();
 
         BooleanListEntry infinity_plus_mending_entry = builder.entryBuilder()
-                .startBooleanToggle(new TranslatableText("better_vanilla.config.infinity_plus_mending.title"), infinity_plus_mending)
+                .startBooleanToggle(new TranslatableText("better_vanilla.config.option.infinity_plus_mending.title"), infinity_plus_mending)
                 .setDefaultValue(true)
-                .setTooltip(new TranslatableText("better_vanilla.config.infinity_plus_mending.description"))
+                .setTooltip(new TranslatableText("better_vanilla.config.option.infinity_plus_mending.description"))
+                .setYesNoTextSupplier((Boolean value) -> {
+                    return new TranslatableText("better_vanilla.config.value." + value.toString());
+                })
                 .build();
 
         BooleanListEntry bookshelves_hold_books_entry = builder.entryBuilder()
-                .startBooleanToggle(new TranslatableText("better_vanilla.config.bookshelves_hold_books.title"), bookshelves_hold_books)
+                .startBooleanToggle(new TranslatableText("better_vanilla.config.option.bookshelves_hold_books.title"), bookshelves_hold_books)
                 .setDefaultValue(true)
-                .setTooltip(new TranslatableText("better_vanilla.config.bookshelves_hold_books.description"))
+                .setTooltip(new TranslatableText("better_vanilla.config.option.bookshelves_hold_books.description"))
+                .setYesNoTextSupplier((Boolean value) -> {
+                    return new TranslatableText("better_vanilla.config.value." + value.toString());
+                })
                 .build();
                 
         BooleanListEntry disable_custom_bookshelves_entry = builder.entryBuilder()
-                .startBooleanToggle(new TranslatableText("better_vanilla.config.disable_custom_bookshelves.title"), disable_custom_bookshelves)
-                .setDefaultValue(true)
-                .setTooltip(new TranslatableText("better_vanilla.config.disable_custom_bookshelves.description"))
+                .startBooleanToggle(new TranslatableText("better_vanilla.config.option.disable_custom_bookshelves.title"), disable_custom_bookshelves)
+                .setDefaultValue(false)
+                .setTooltip(new TranslatableText("better_vanilla.config.option.disable_custom_bookshelves.description"))
+                .requireRestart()
+                .setYesNoTextSupplier((Boolean value) -> {
+                    return new TranslatableText("better_vanilla.config.value." + value.toString());
+                })
                 .build();
 
         general.addEntry(remove_modded_notice_entry);
