@@ -1,10 +1,10 @@
 {
     "schemaVersion": 1,
     "name": "Better Vanilla",
-    "id": "better-vanilla",
+    "id": "better_vanilla",
     "version": "1.0.0",
     "description": "A mod to make the game a bit cooler and more sensible",
-    "icon": "assets/better-vanilla/icon.png",
+    "icon": "assets/better_vanilla/icon.png",
     "authors": [
         {
             "name": "Kale-Ko",

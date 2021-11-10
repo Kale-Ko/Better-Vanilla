@@ -21,7 +21,7 @@ import org.apache.logging.log4j.Logger;
 import com.kale_ko.better_vanilla.config.Config;
 
 public class Main implements ModInitializer {
-    public static final Logger Console = LogManager.getLogger("better-vanilla");
+    public static final Logger Console = LogManager.getLogger("better_vanilla");
     public static final Config config = new Config();
 
     @Override
