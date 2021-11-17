@@ -52,7 +52,7 @@ public class Main implements ModInitializer {
 
         config.load();
 
-        if (!(Boolean) config.get("disable_custom_blocks")) {
+        if (!(Boolean) config.get("disable_custom_blocks", ConfigType.Boolean)) {
             Block bookshelf = new BookshelfBlock(AbstractBlock.Settings.of(Material.WOOD).strength(1.5F).sounds(BlockSoundGroup.WOOD));
             Registry.register(Registry.BLOCK, 144, "bookshelf", bookshelf);
             BlockItem bookshelf_item = new BlockItem(bookshelf, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
