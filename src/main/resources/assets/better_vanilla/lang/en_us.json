@@ -20,5 +20,6 @@
     "better_vanilla.config.option.disable_custom_blocks.description": "Disables custom blocks entirely (May help with server issues) (Requires restart)",
     "better_vanilla.config.value.true": "True",
     "better_vanilla.config.value.false": "False",
-    "death.attack.cutByStoneCutter": "%1$s was cut to death"
+    "death.attack.cutByStoneCutter": "%1$s was cut to death",
+    "death.attack.cutByStoneCutter.player": "%1$s was cut to death whilst trying to escape %2$2"
 }
