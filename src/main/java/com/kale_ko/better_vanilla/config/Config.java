@@ -19,18 +19,17 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Config {
-    public static final String version = "1";
+    public static final String version = "2";
 
     public static final File configFile = FabricLoader.getInstance().getConfigDir().resolve("better_vanilla.config").toFile();
 
-    public boolean remove_modded_notice = true;
-    public boolean creepers_ignite_from_fire = true;
-    public boolean creepers_defuse_in_water = true;
-    public boolean infinity_plus_mending = true;
-    public boolean bookshelves_hold_books = true;
-    public boolean stonecutters_deal_damage = true;
-    public boolean campfires_set_fire = true;
-    public boolean disable_custom_blocks = false;
+    public void create(ConfigKey config) {
+
+    }
+
+    public Object get(String id) {
+
+    }
 
     public void save() {
         String data = "version=" + version + "\n";

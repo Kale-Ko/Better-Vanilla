@@ -20,6 +20,6 @@ import net.minecraft.enchantment.MendingEnchantment;
 public class InfinityPlusMending {
     @Inject(at = @At("HEAD"), method = "canAccept()Z", cancellable = true)
     public void canAccept(Enchantment other, CallbackInfoReturnable<Boolean> info) {
-        info.setReturnValue(other instanceof MendingEnchantment ? Main.config.infinity_plus_mending : !(other instanceof InfinityEnchantment));
+        info.setReturnValue(other instanceof MendingEnchantment ? (Boolean) Main.config.get("infinity_plus_mending") : !(other instanceof InfinityEnchantment));
     }
 }
