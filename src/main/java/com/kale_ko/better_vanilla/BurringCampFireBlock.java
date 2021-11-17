@@ -14,8 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BurringCampFireBlock extends CampfireBlock {
-    public BurringCampFireBlock(Settings settings) {
-        super(true, 0, settings);
+    public BurringCampFireBlock(boolean emitsParticles, Settings settings) {
+        super(emitsParticles, 0, settings);
     }
 
     @Override
