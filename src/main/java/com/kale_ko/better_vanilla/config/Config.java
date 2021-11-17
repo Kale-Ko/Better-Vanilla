@@ -112,6 +112,12 @@ public class Config {
                         .startStrField(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".title"), (String) kvp.getValue())
                         .setDefaultValue((String) kvp.getKey().defaultValue)
                         .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".description"))
+                        .setSaveConsumer(value -> {
+                            configRegistry.remove(kvp.getKey());
+                            configRegistry.put(kvp.getKey(), value);
+
+                            save();
+                        })
                         .build();
 
                 if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.General) {
@@ -124,6 +130,12 @@ public class Config {
                         .startFloatField(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".title"), (Float) kvp.getValue())
                         .setDefaultValue((Float) kvp.getKey().defaultValue)
                         .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".description"))
+                        .setSaveConsumer(value -> {
+                            configRegistry.remove(kvp.getKey());
+                            configRegistry.put(kvp.getKey(), value);
+
+                            save();
+                        })
                         .build();
 
                 if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.General) {
@@ -139,6 +151,12 @@ public class Config {
                         .setYesNoTextSupplier((Boolean value) -> {
                             return new TranslatableText("better_vanilla.config.value." + value.toString());
                         })
+                        .setSaveConsumer(value -> {
+                            configRegistry.remove(kvp.getKey());
+                            configRegistry.put(kvp.getKey(), value);
+
+                            save();
+                        })
                         .build();
 
                 if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.General) {
@@ -150,9 +168,6 @@ public class Config {
         }
 
         builder.setFallbackCategory(general);
-        builder.setSavingRunnable(() -> {
-            save();
-        });
 
         return builder;
     }
