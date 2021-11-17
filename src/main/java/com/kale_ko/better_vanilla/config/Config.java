@@ -135,7 +135,7 @@ public class Config {
             } else if (kvp.getKey().type == ConfigType.Number) {
                 FloatListEntry entry = builder.entryBuilder()
                         .startFloatField(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".title"), Float.parseFloat((String) kvp.getValue()))
-                        .setDefaultValue((Float) kvp.getKey().defaultValue)
+                        .setDefaultValue(Float.parseFloat((String) kvp.getKey().defaultValue))
                         .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".description"))
                         .setSaveConsumer(value -> {
                             configRegistry.remove(kvp.getKey());
@@ -153,7 +153,7 @@ public class Config {
             } else if (kvp.getKey().type == ConfigType.Boolean) {
                 BooleanListEntry entry = builder.entryBuilder()
                         .startBooleanToggle(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".title"), Boolean.parseBoolean((String) kvp.getValue()))
-                        .setDefaultValue((Boolean) kvp.getKey().defaultValue)
+                        .setDefaultValue(Boolean.parseBoolean((String) kvp.getKey().defaultValue))
                         .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".description"))
                         .setYesNoTextSupplier((Boolean value) -> {
                             return new TranslatableText("better_vanilla.config.value." + value.toString());
