@@ -42,6 +42,12 @@ public class Main implements ModInitializer {
 
             BlockItem stonecutter_item = new BlockItem(stonecutter, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
             Registry.register(Registry.ITEM, 1049, "stonecutter", stonecutter_item);
+            
+            Block campfire = new BurringCampFireBlock(AbstractBlock.Settings.of(Material.WOOD).strength(1.5F).sounds(BlockSoundGroup.WOOD));
+            Registry.register(Registry.BLOCK, 690, "campfire", campfire);
+
+            BlockItem campfire_item = new BlockItem(campfire, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
+            Registry.register(Registry.ITEM, 1049, "campfire", campfire_item);
         }
 
         Console.info("Better vanilla has loaded!");

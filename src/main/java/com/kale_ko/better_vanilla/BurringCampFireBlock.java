@@ -9,19 +9,24 @@ package com.kale_ko.better_vanilla;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.StonecutterBlock;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class DamagingStonecutterBlock extends StonecutterBlock {
-    public DamagingStonecutterBlock(Settings settings) {
+public class BurringCampFireBlock extends StonecutterBlock {
+    public BurringCampFireBlock(Settings settings) {
         super(settings);
     }
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (Main.config.stonecutters_deal_damage) {
-            entity.damage(new CustomDamageSource("cutByStoneCutter"), 1.25f);
+        if (Main.config.campfires_set_fire && !entity.isFireImmune() && !EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
+            entity.setOnFire(true);
+            entity.setFireTicks(60);
         }
+
+        super.onEntityCollision(state, world, pos, entity);
     }
 }
