@@ -9,9 +9,7 @@ package com.kale_ko.better_vanilla;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -22,7 +20,7 @@ public class BurringCampFireBlock extends CampfireBlock {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (Main.config.campfires_set_fire && !entity.isFireImmune() && !EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
+        if (Main.config.campfires_set_fire && !entity.isFireImmune()) {
             entity.setOnFire(true);
             entity.setFireTicks(60);
         }
