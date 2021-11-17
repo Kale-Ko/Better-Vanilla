@@ -7,6 +7,7 @@
 
 package com.kale_ko.better_vanilla;
 
+import com.kale_ko.better_vanilla.config.ConfigType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.StonecutterBlock;
 import net.minecraft.entity.Entity;
@@ -20,7 +21,7 @@ public class DamagingStonecutterBlock extends StonecutterBlock {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if ((Boolean) Main.config.get("stonecutters_deal_damage")) {
+        if ((Boolean) Main.config.get("stonecutters_deal_damage", ConfigType.Boolean)) {
             entity.damage(new CustomDamageSource("cutByStoneCutter"), 1.25f);
         }
     }

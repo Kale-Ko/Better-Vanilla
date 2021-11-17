@@ -7,6 +7,7 @@
 
 package com.kale_ko.better_vanilla;
 
+import com.kale_ko.better_vanilla.config.ConfigType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,7 +30,7 @@ public class BookshelfBlock extends Block {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!(Boolean) Main.config.get("bookshelves_hold_books")) {
+        if (!(Boolean) Main.config.get("bookshelves_hold_books", ConfigType.Boolean)) {
             return ActionResult.FAIL;
         }
 
