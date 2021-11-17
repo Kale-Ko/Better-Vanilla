@@ -30,20 +30,18 @@ public class Main implements ModInitializer {
 
         config.load();
 
-        if (!config.disable_custom_bookshelves) {
+        if (!config.disable_custom_blocks) {
             Block bookshelf = new BookshelfBlock(AbstractBlock.Settings.of(Material.WOOD).strength(1.5F).sounds(BlockSoundGroup.WOOD));
             Registry.register(Registry.BLOCK, 144, "bookshelf", bookshelf);
 
             BlockItem bookshelf_item = new BlockItem(bookshelf, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
             Registry.register(Registry.ITEM, 233, "bookshelf", bookshelf_item);
-        }
 
-        if (true) {
             Block stonecutter = new DamagingStonecutterBlock(AbstractBlock.Settings.of(Material.WOOD).strength(1.5F).sounds(BlockSoundGroup.WOOD));
-            Registry.register(Registry.BLOCK, "stonecutter", stonecutter);
+            Registry.register(Registry.BLOCK, 690, "stonecutter", stonecutter);
 
             BlockItem stonecutter_item = new BlockItem(stonecutter, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
-            Registry.register(Registry.ITEM, "stonecutter", stonecutter_item);
+            Registry.register(Registry.ITEM, 1049, "stonecutter", stonecutter_item);
         }
 
         Console.info("Better vanilla has loaded!");

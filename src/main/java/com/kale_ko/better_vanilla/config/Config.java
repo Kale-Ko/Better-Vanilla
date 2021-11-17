@@ -24,14 +24,13 @@ public class Config {
     public static final File configFile = FabricLoader.getInstance().getConfigDir().resolve("better_vanilla.config").toFile();
 
     public boolean remove_modded_notice = true;
-
     public boolean creepers_ignite_from_fire = true;
     public boolean creepers_defuse_in_water = true;
-
     public boolean infinity_plus_mending = true;
-
     public boolean bookshelves_hold_books = true;
-    public boolean disable_custom_bookshelves = false;
+    public boolean stonecutters_deal_damage = true;
+    public boolean campfires_set_fire = true;
+    public boolean disable_custom_blocks = false;
 
     public void save() {
         String data = "version=" + version + "\n";
@@ -41,7 +40,9 @@ public class Config {
         data += "creepers_defuse_in_water=" + creepers_defuse_in_water + "\n";
         data += "infinity_plus_mending=" + infinity_plus_mending + "\n";
         data += "bookshelves_hold_books=" + bookshelves_hold_books + "\n";
-        data += "disable_custom_bookshelves=" + disable_custom_bookshelves + "\n";
+        data += "stonecutters_deal_damage=" + stonecutters_deal_damage + "\n";
+        data += "campfires_set_fire=" + campfires_set_fire + "\n";
+        data += "disable_custom_blocks=" + disable_custom_blocks + "\n";
 
         try {
             FileWriter configWriter = new FileWriter(configFile);
@@ -91,8 +92,12 @@ public class Config {
                     infinity_plus_mending = Boolean.parseBoolean(keyValue[1]);
                 } else if (keyValue[0].equals("bookshelves_hold_books")) {
                     bookshelves_hold_books = Boolean.parseBoolean(keyValue[1]);
-                } else if (keyValue[0].equals("disable_custom_bookshelves")) {
-                    disable_custom_bookshelves = Boolean.parseBoolean(keyValue[1]);
+                } else if (keyValue[0].equals("stonecutters_deal_damage")) {
+                    stonecutters_deal_damage = Boolean.parseBoolean(keyValue[1]);
+                } else if (keyValue[0].equals("campfires_set_fire")) {
+                    campfires_set_fire = Boolean.parseBoolean(keyValue[1]);
+                } else if (keyValue[0].equals("disable_custom_blocks")) {
+                    disable_custom_blocks = Boolean.parseBoolean(keyValue[1]);
                 }
             }
         } catch (Exception err) {
@@ -151,12 +156,29 @@ public class Config {
                 })
                 .build();
 
-        BooleanListEntry disable_custom_bookshelves_entry = builder.entryBuilder()
-                .startBooleanToggle(new TranslatableText("better_vanilla.config.option.disable_custom_bookshelves.title"), disable_custom_bookshelves)
+        BooleanListEntry stonecutters_deal_damage_entry = builder.entryBuilder()
+                .startBooleanToggle(new TranslatableText("better_vanilla.config.option.stonecutters_deal_damage.title"), stonecutters_deal_damage)
                 .setDefaultValue(false)
-                .setTooltip(new TranslatableText("better_vanilla.config.option.disable_custom_bookshelves.description"))
-                .requireRestart()
-                .setYesNoTextSupplier((Boolean value) -> {
+                .setTooltip(new TranslatableText("better_vanilla.config.option.stonecutters_deal_damage.description"))
+                .requireRestart().setYesNoTextSupplier((Boolean value) -> {
+                    return new TranslatableText("better_vanilla.config.value." + value.toString());
+                })
+                .build();
+
+        BooleanListEntry campfires_set_fire_entry = builder.entryBuilder()
+                .startBooleanToggle(new TranslatableText("better_vanilla.config.option.campfires_set_fire.title"), campfires_set_fire)
+                .setDefaultValue(false)
+                .setTooltip(new TranslatableText("better_vanilla.config.option.campfires_set_fire.description"))
+                .requireRestart().setYesNoTextSupplier((Boolean value) -> {
+                    return new TranslatableText("better_vanilla.config.value." + value.toString());
+                })
+                .build();
+
+        BooleanListEntry disable_custom_blocks_entry = builder.entryBuilder()
+                .startBooleanToggle(new TranslatableText("better_vanilla.config.option.disable_custom_blocks.title"), disable_custom_blocks)
+                .setDefaultValue(false)
+                .setTooltip(new TranslatableText("better_vanilla.config.option.disable_custom_blocks.description"))
+                .requireRestart().setYesNoTextSupplier((Boolean value) -> {
                     return new TranslatableText("better_vanilla.config.value." + value.toString());
                 })
                 .build();
@@ -166,7 +188,9 @@ public class Config {
         general.addEntry(creepers_defuse_in_water_entry);
         general.addEntry(infinity_plus_mending_entry);
         general.addEntry(bookshelves_hold_books_entry);
-        advanced.addEntry(disable_custom_bookshelves_entry);
+        general.addEntry(stonecutters_deal_damage_entry);
+        general.addEntry(campfires_set_fire_entry);
+        advanced.addEntry(disable_custom_blocks_entry);
 
         builder.setFallbackCategory(general);
         builder.setSavingRunnable(() -> {
@@ -175,7 +199,9 @@ public class Config {
             creepers_defuse_in_water = creepers_defuse_in_water_entry.getValue();
             infinity_plus_mending = infinity_plus_mending_entry.getValue();
             bookshelves_hold_books = bookshelves_hold_books_entry.getValue();
-            disable_custom_bookshelves = disable_custom_bookshelves_entry.getValue();
+            stonecutters_deal_damage = stonecutters_deal_damage_entry.getValue();
+            campfires_set_fire = campfires_set_fire_entry.getValue();
+            disable_custom_blocks = disable_custom_blocks_entry.getValue();
 
             save();
         });
