@@ -16,8 +16,8 @@
     "better_vanilla.config.option.stonecutters_deal_damage.description": "Make stonecutters deal damage when you step on them",
     "better_vanilla.config.option.campfires_set_fire.title": "Campfires Set You On Fire",
     "better_vanilla.config.option.campfires_set_fire.description": "Make campfires set you on fire when you step on them",
-    "better_vanilla.config.option.disable_custom_bookshelves.title": "Disable Custom Bookshelves",
-    "better_vanilla.config.option.disable_custom_bookshelves.description": "Disables the custom bookshelf block entirely (May help with server issues) (Requires restart)",
+    "better_vanilla.config.option.disable_custom_blocks.title": "Disable Custom Blocks",
+    "better_vanilla.config.option.disable_custom_blocks.description": "Disables custom blocks entirely (May help with server issues) (Requires restart)",
     "better_vanilla.config.value.true": "True",
     "better_vanilla.config.value.false": "False",
     "death.attack.cutByStoneCutter": "%1$s was cut to death"

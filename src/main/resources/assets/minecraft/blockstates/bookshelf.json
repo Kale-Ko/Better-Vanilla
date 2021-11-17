@@ -1,16 +1,16 @@
 {
     "variants": {
         "books=3": {
-            "model": "better_vanilla:block/bookshelf_full"
+            "model": "minecraft:block/bookshelf_full"
         },
         "books=2": {
-            "model": "better_vanilla:block/bookshelf_mostly_full"
+            "model": "minecraft:block/bookshelf_mostly_full"
         },
         "books=1": {
-            "model": "better_vanilla:block/bookshelf_mostly_empty"
+            "model": "minecraft:block/bookshelf_mostly_empty"
         },
         "books=0": {
-            "model": "better_vanilla:block/bookshelf_empty"
+            "model": "minecraft:block/bookshelf_empty"
         }
     }
 }
