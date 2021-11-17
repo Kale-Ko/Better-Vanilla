@@ -44,6 +44,8 @@ public class Config {
     }
 
     public void save() {
+        Main.Console.info("Config is saving..");
+
         StringBuilder data = new StringBuilder("version=" + version + "\n");
 
         for (Map.Entry<ConfigKey, Object> kvp : configRegistry.entrySet()) {
@@ -62,6 +64,8 @@ public class Config {
     }
 
     public void load() {
+        Main.Console.info("Config is loading..");
+
         if (!configFile.exists()) {
             save();
 
@@ -90,7 +94,6 @@ public class Config {
 
                 for (Map.Entry<ConfigKey, Object> kvp : configRegistry.entrySet()) {
                     if (keyValue[0].equalsIgnoreCase(kvp.getKey().id)) {
-                        configRegistry.remove(kvp.getKey());
                         configRegistry.put(kvp.getKey(), keyValue[1]);
                     }
                 }
@@ -98,6 +101,8 @@ public class Config {
         } catch (Exception err) {
             Main.Console.error("Failed to parse config");
         }
+
+        Main.Console.info("Config has been loaded!");
     }
 
     public ConfigBuilder buildMenu() {
