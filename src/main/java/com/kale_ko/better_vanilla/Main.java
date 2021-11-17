@@ -38,6 +38,14 @@ public class Main implements ModInitializer {
             Registry.register(Registry.ITEM, 233, "bookshelf", bookshelf_item);
         }
 
+        if (true) {
+            Block stonecutter = new DamagingStonecutterBlock(AbstractBlock.Settings.of(Material.WOOD).strength(1.5F).sounds(BlockSoundGroup.WOOD));
+            Registry.register(Registry.BLOCK, "stonecutter", stonecutter);
+
+            BlockItem stonecutter_item = new BlockItem(stonecutter, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
+            Registry.register(Registry.ITEM, "stonecutter", stonecutter_item);
+        }
+
         Console.info("Better vanilla has loaded!");
     }
 }
