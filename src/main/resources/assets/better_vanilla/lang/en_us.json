@@ -19,5 +19,6 @@
     "better_vanilla.config.option.disable_custom_bookshelves.title": "Disable Custom Bookshelves",
     "better_vanilla.config.option.disable_custom_bookshelves.description": "Disables the custom bookshelf block entirely (May help with server issues) (Requires restart)",
     "better_vanilla.config.value.true": "True",
-    "better_vanilla.config.value.false": "False"
+    "better_vanilla.config.value.false": "False",
+    "death.attack.cutByStoneCutter": "%1$s was cut to death"
 }
