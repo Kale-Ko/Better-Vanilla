@@ -139,7 +139,7 @@ public class Config {
                         .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".description"))
                         .setSaveConsumer(value -> {
                             configRegistry.remove(kvp.getKey());
-                            configRegistry.put(kvp.getKey(), value);
+                            configRegistry.put(kvp.getKey(), value.toString());
 
                             save();
                         })
@@ -159,8 +159,7 @@ public class Config {
                             return new TranslatableText("better_vanilla.config.value." + value.toString());
                         })
                         .setSaveConsumer(value -> {
-                            configRegistry.remove(kvp.getKey());
-                            configRegistry.put(kvp.getKey(), value);
+                            configRegistry.put(kvp.getKey(), value.toString());
 
                             save();
                         })
