@@ -8,16 +8,16 @@
 package com.kale_ko.better_vanilla;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.StonecutterBlock;
+import net.minecraft.block.CampfireBlock;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BurringCampFireBlock extends StonecutterBlock {
+public class BurringCampFireBlock extends CampfireBlock {
     public BurringCampFireBlock(Settings settings) {
-        super(settings);
+        super(true, 0, settings);
     }
 
     @Override
