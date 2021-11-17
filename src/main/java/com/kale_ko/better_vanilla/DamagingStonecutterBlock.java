@@ -21,7 +21,7 @@ public class DamagingStonecutterBlock extends StonecutterBlock {
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (Main.config.stonecutters_deal_damage) {
-            entity.damage(new CustomDamageSource("cutByStoneCutter"), 0.2f);
+            entity.damage(new CustomDamageSource("cutByStoneCutter"), 1.25f);
         }
     }
 }
