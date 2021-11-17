@@ -22,8 +22,10 @@ import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.function.ToIntFunction;
-
 import com.kale_ko.better_vanilla.config.Config;
+import com.kale_ko.better_vanilla.config.ConfigCategory;
+import com.kale_ko.better_vanilla.config.ConfigKey;
+import com.kale_ko.better_vanilla.config.ConfigType;
 
 public class Main implements ModInitializer {
     public static final Logger Console = LogManager.getLogger("better_vanilla");
@@ -39,9 +41,18 @@ public class Main implements ModInitializer {
     public void onInitialize() {
         Console.info("Better vanilla is loading..");
 
+        config.create(new ConfigKey("remove_modded_notice", ConfigCategory.General, ConfigType.Boolean, true));
+        config.create(new ConfigKey("creepers_ignite_from_fire", ConfigCategory.General, ConfigType.Boolean, true));
+        config.create(new ConfigKey("creepers_defuse_in_water", ConfigCategory.General, ConfigType.Boolean, true));
+        config.create(new ConfigKey("infinity_plus_mending", ConfigCategory.General, ConfigType.Boolean, true));
+        config.create(new ConfigKey("bookshelves_hold_books", ConfigCategory.General, ConfigType.Boolean, true));
+        config.create(new ConfigKey("stonecutters_deal_damage", ConfigCategory.General, ConfigType.Boolean, true));
+        config.create(new ConfigKey("campfires_set_fire", ConfigCategory.General, ConfigType.Boolean, true));
+        config.create(new ConfigKey("disable_custom_blocks", ConfigCategory.Advanced, ConfigType.Boolean, false));
+
         config.load();
 
-        if (!config.disable_custom_blocks) {
+        if (!(Boolean) config.get("disable_custom_blocks")) {
             Block bookshelf = new BookshelfBlock(AbstractBlock.Settings.of(Material.WOOD).strength(1.5F).sounds(BlockSoundGroup.WOOD));
             Registry.register(Registry.BLOCK, 144, "bookshelf", bookshelf);
             BlockItem bookshelf_item = new BlockItem(bookshelf, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
