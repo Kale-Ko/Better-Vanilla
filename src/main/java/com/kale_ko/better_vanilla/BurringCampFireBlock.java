@@ -7,6 +7,7 @@
 
 package com.kale_ko.better_vanilla;
 
+import com.kale_ko.better_vanilla.config.ConfigType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.entity.Entity;
@@ -20,7 +21,7 @@ public class BurringCampFireBlock extends CampfireBlock {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if ((Boolean) Main.config.get("campfires_set_fire") && !entity.isFireImmune()) {
+        if ((Boolean) Main.config.get("campfires_set_fire", ConfigType.Boolean) && !entity.isFireImmune()) {
             entity.setOnFire(true);
             entity.setFireTicks(60);
         }
