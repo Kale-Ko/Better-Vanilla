@@ -29,7 +29,7 @@ public class BookshelfBlock extends Block {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!Main.config.bookshelves_hold_books) {
+        if (!(Boolean) Main.config.get("bookshelves_hold_books")) {
             return ActionResult.FAIL;
         }
 

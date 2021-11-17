@@ -20,7 +20,7 @@ public class BurringCampFireBlock extends CampfireBlock {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (Main.config.campfires_set_fire && !entity.isFireImmune()) {
+        if ((Boolean) Main.config.get("campfires_set_fire") && !entity.isFireImmune()) {
             entity.setOnFire(true);
             entity.setFireTicks(60);
         }

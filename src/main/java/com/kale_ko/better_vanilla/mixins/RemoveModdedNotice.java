@@ -18,6 +18,6 @@ import net.minecraft.client.MinecraftClient;
 public class RemoveModdedNotice {
     @Inject(at = @At("HEAD"), method = "isModded()Z", cancellable = true)
     public void isModded(CallbackInfoReturnable<Boolean> info) {
-        info.setReturnValue(!Main.config.remove_modded_notice);
+        info.setReturnValue(!(Boolean) Main.config.get("remove_modded_notice"));
     }
 }

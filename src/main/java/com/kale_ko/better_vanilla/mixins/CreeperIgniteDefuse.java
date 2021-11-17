@@ -18,7 +18,7 @@ import net.minecraft.entity.ai.goal.CreeperIgniteGoal;
 public class CreeperIgniteDefuse {
     @Inject(at = @At("TAIL"), method = "tick()V")
     public void tick(CallbackInfo info) {
-        if (Main.config.creepers_defuse_in_water && ((CreeperIgniteGoalAccessor) ((CreeperIgniteDefuse) ((Object) this))).getCreeper().isTouchingWaterOrRain()) {
+        if ((Boolean) Main.config.get("creepers_defuse_in_water") && ((CreeperIgniteGoalAccessor) ((CreeperIgniteDefuse) ((Object) this))).getCreeper().isTouchingWaterOrRain()) {
             ((CreeperIgniteGoalAccessor) ((CreeperIgniteDefuse) ((Object) this))).getCreeper().setFuseSpeed(-1);
         }
     }
