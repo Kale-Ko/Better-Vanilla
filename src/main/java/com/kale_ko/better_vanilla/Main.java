@@ -52,10 +52,15 @@ public class Main implements ModInitializer {
             BlockItem stonecutter_item = new BlockItem(stonecutter, new Item.Settings().group(ItemGroup.DECORATIONS));
             Registry.register(Registry.ITEM, 1049, "stonecutter", stonecutter_item);
 
-            Block campfire = new BurringCampFireBlock(AbstractBlock.Settings.of(Material.WOOD, MapColor.SPRUCE_BROWN).strength(2.0F).sounds(BlockSoundGroup.WOOD).luminance(createLightLevelFromLitBlockState(15)).nonOpaque());
+            Block campfire = new BurringCampFireBlock(true, AbstractBlock.Settings.of(Material.WOOD, MapColor.SPRUCE_BROWN).strength(2.0F).sounds(BlockSoundGroup.WOOD).luminance(createLightLevelFromLitBlockState(15)).nonOpaque());
             Registry.register(Registry.BLOCK, 694, "campfire", campfire);
             BlockItem campfire_item = new BlockItem(campfire, new Item.Settings().group(ItemGroup.DECORATIONS));
             Registry.register(Registry.ITEM, 1055, "campfire", campfire_item);
+
+            Block soul_campfire = new BurringCampFireBlock(false, AbstractBlock.Settings.of(Material.WOOD, MapColor.SPRUCE_BROWN).strength(2.0F).sounds(BlockSoundGroup.WOOD).luminance(createLightLevelFromLitBlockState(10)).nonOpaque());
+            Registry.register(Registry.BLOCK, 694, "soul_campfire", soul_campfire);
+            BlockItem soul_campfire_item = new BlockItem(soul_campfire, new Item.Settings().group(ItemGroup.DECORATIONS));
+            Registry.register(Registry.ITEM, 1055, "soul_campfire", soul_campfire_item);
         }
 
         Console.info("Better vanilla has loaded!");
