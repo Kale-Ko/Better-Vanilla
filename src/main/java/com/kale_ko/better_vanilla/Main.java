@@ -58,9 +58,9 @@ public class Main implements ModInitializer {
             Registry.register(Registry.ITEM, 1055, "campfire", campfire_item);
 
             Block soul_campfire = new BurringCampFireBlock(false, AbstractBlock.Settings.of(Material.WOOD, MapColor.SPRUCE_BROWN).strength(2.0F).sounds(BlockSoundGroup.WOOD).luminance(createLightLevelFromLitBlockState(10)).nonOpaque());
-            Registry.register(Registry.BLOCK, 694, "soul_campfire", soul_campfire);
+            Registry.register(Registry.BLOCK, 695, "soul_campfire", soul_campfire);
             BlockItem soul_campfire_item = new BlockItem(soul_campfire, new Item.Settings().group(ItemGroup.DECORATIONS));
-            Registry.register(Registry.ITEM, 1055, "soul_campfire", soul_campfire_item);
+            Registry.register(Registry.ITEM, 1056, "soul_campfire", soul_campfire_item);
         }
 
         Console.info("Better vanilla has loaded!");
