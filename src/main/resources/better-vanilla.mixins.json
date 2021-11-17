@@ -7,8 +7,7 @@
         "Creeper",
         "CreeperIgniteGoalAccessor",
         "CreeperIgniteDefuse",
-        "InfinityPlusMending",
-        "StoneCutterDealsDamage"
+        "InfinityPlusMending"
     ],
     "client": [
         "RemoveModdedNotice"
