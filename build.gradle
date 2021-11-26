@@ -6,7 +6,7 @@ plugins {
 sourceCompatibility = JavaVersion.toVersion(project.java_version)
 targetCompatibility = JavaVersion.toVersion(project.java_version)
 
-archivesBaseName = "better_vanilla"
+archivesBaseName = project.mod_id
 group = "com.kale_ko"
 version = project.mod_version
 
@@ -18,7 +18,7 @@ repositories {
 
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.minecraft_version}+${project.yarn_mappings}:v2"
+	mappings "net.fabricmc:yarn:${project.minecraft_version}+${project.yarn_mappings}"
 	modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}+${project.mod_compatibility}"
 
@@ -36,17 +36,9 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 processResources {
-    inputs.property "version", project.version
-    inputs.property "depends.java", project.java_version
-    inputs.property "depends.minecraft", project.minecraft_version
-    inputs.property "depends.fabricloader", project.fabric_loader_version
-    inputs.property "depends.farbic", project.fabric_api_version
-    inputs.property "depends.modmenu", project.modmenu_version
-    inputs.property "depends.cloth-config2", project.cloth_config_version
-
     filesMatching("fabric.mod.json") {
-        expand "mod_id": project.archivesBaseName,
-        "mod_version": project.version,
+        expand "mod_id": project.mod_id,
+        "mod_version": project.mod_version,
         "java_version": project.java_version,
         "minecraft_version": project.minecraft_version,
         "mod_compatibility": project.mod_compatibility,
@@ -54,6 +46,10 @@ processResources {
         "fabric_api_version": project.fabric_api_version,
         "modmenu_version": project.modmenu_version,
         "cloth_config_version": project.cloth_config_version
+    }
+
+    filesMatching("better_vanilla.mixins.json") {
+        expand "mod_id": project.mod_id
     }
 }
 
