@@ -53,6 +53,9 @@ processResources {
     }
 }
 
+jar.archiveFileName = project.archivesBaseName + "-" + project.version + ".jar"
+jar.destinationDirectory = projectDir
+
 java {
 	withSourcesJar()
 }
