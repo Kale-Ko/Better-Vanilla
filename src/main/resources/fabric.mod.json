@@ -4,7 +4,7 @@
     "id": "${mod_id}",
     "version": "${mod_version}",
     "description": "A mod to make the game a bit cooler and more sensible",
-    "icon": "assets/better_vanilla/icon.png",
+    "icon": "assets/${mod_id}/icon.png",
     "authors": [
         {
             "name": "Kale-Ko",
@@ -26,16 +26,16 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.kale_ko.better_vanilla.Main"
+            "com.kale_ko.${mod_id}.Main"
         ],
         "client": [],
         "server": [],
         "modmenu": [
-            "com.kale_ko.better_vanilla.config.ConfigMenu"
+            "com.kale_ko.${mod_id}.config.ConfigMenu"
         ]
     },
     "mixins": [
-        "better-vanilla.mixins.json"
+        "${mod_id}.mixins.json"
     ],
     "jars": [
         {
