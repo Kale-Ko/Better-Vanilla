@@ -39,6 +39,9 @@
     ],
     "jars": [
         {
+            "file": "META-INF/jars/fabric-api-${fabric_api_version}+${mod_compatibility}.jar"
+        },
+        {
             "file": "META-INF/jars/modmenu-${modmenu_version}.jar"
         },
         {
