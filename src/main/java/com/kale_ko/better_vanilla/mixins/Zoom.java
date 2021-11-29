@@ -12,8 +12,6 @@ import net.minecraft.util.math.Vec3d;
 
 @Mixin(Camera.class)
 public class Zoom {
-    public static Boolean zoomed = false;
-
     @Inject(at = @At("HEAD"), method = "getProjection()Lnet/minecraft/client/render/Camera$Projection;", cancellable = true)
     public void getProjection(CallbackInfoReturnable<Camera.Projection> info) throws Exception {
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
@@ -29,7 +27,7 @@ public class Zoom {
     }
 
     public double getZoom() {
-        if ((Boolean) Main.config.get("zoom_enabled", ConfigType.Boolean) && zoomed) {
+        if ((Boolean) Main.config.get("zoom_enabled", ConfigType.Boolean) && Main.zoomed) {
             return (double) Main.config.get("zoom_amount", ConfigType.Number);
         } else {
             return 1d;
