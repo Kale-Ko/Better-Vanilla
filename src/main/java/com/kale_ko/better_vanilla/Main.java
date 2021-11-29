@@ -59,7 +59,7 @@ public class Main implements ModInitializer {
         config.create(new ConfigKey("stonecutters_deal_damage", ConfigCategory.General, ConfigType.Boolean, "true"));
         config.create(new ConfigKey("campfires_set_fire", ConfigCategory.General, ConfigType.Boolean, "true"));
         config.create(new ConfigKey("zoom_enabled", ConfigCategory.General, ConfigType.Boolean, "true"));
-        config.create(new ConfigKey("zoom_amount", ConfigCategory.General, ConfigType.Number, "4.00"));
+        config.create(new ConfigKey("zoom_amount", ConfigCategory.General, ConfigType.Double, "4.00"));
         config.create(new ConfigKey("disable_custom_blocks", ConfigCategory.Advanced, ConfigType.Boolean, "false"));
         config.create(new ConfigKey("disable_custom_keybinds", ConfigCategory.Advanced, ConfigType.Boolean, "false"));
 

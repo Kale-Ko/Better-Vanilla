@@ -12,6 +12,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.gui.entries.BooleanListEntry;
+import me.shedaniel.clothconfig2.gui.entries.DoubleListEntry;
 import me.shedaniel.clothconfig2.gui.entries.FloatListEntry;
 import me.shedaniel.clothconfig2.gui.entries.StringListEntry;
 import net.minecraft.text.TranslatableText;
@@ -37,7 +38,8 @@ public class Config {
         for (Map.Entry<ConfigKey, Object> kvp : configRegistry.entrySet()) {
             if (kvp.getKey().id.equalsIgnoreCase(id)) {
                 if (type == ConfigType.String) return kvp.getValue();
-                else if (type == ConfigType.Number) return Float.parseFloat((String)kvp.getValue());
+                else if (type == ConfigType.Float) return Float.parseFloat((String)kvp.getValue());
+                else if (type == ConfigType.Double) return Double.parseDouble((String)kvp.getValue());
                 else if (type == ConfigType.Boolean) return Boolean.parseBoolean((String)kvp.getValue());
             }
         }
@@ -132,10 +134,28 @@ public class Config {
                 } else if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.Advanced) {
                     advanced.addEntry(entry);
                 }
-            } else if (kvp.getKey().type == ConfigType.Number) {
+            } else if (kvp.getKey().type == ConfigType.Float) {
                 FloatListEntry entry = builder.entryBuilder()
                         .startFloatField(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".title"), Float.parseFloat((String) kvp.getValue()))
                         .setDefaultValue(Float.parseFloat((String) kvp.getKey().defaultValue))
+                        .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".description"))
+                        .setSaveConsumer(value -> {
+                            configRegistry.remove(kvp.getKey());
+                            configRegistry.put(kvp.getKey(), value.toString());
+
+                            save();
+                        })
+                        .build();
+
+                if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.General) {
+                    general.addEntry(entry);
+                } else if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.Advanced) {
+                    advanced.addEntry(entry);
+                }
+            } else if (kvp.getKey().type == ConfigType.Double) {
+                DoubleListEntry entry = builder.entryBuilder()
+                        .startDoubleField(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".title"), Double.parseDouble((String) kvp.getValue()))
+                        .setDefaultValue(Double.parseDouble((String) kvp.getKey().defaultValue))
                         .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".description"))
                         .setSaveConsumer(value -> {
                             configRegistry.remove(kvp.getKey());
