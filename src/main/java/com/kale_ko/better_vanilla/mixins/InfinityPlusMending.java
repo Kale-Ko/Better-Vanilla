@@ -19,7 +19,7 @@ import net.minecraft.enchantment.MendingEnchantment;
 
 @Mixin(InfinityEnchantment.class)
 public class InfinityPlusMending {
-    @Inject(at = @At("HEAD"), method = "canAccept()Z", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "canAccept(Lnet/minecraft/enchantment/Enchantment;)Z", cancellable = true)
     public void canAccept(Enchantment other, CallbackInfoReturnable<Boolean> info) {
         info.setReturnValue(other instanceof MendingEnchantment ? (Boolean) Main.config.get("infinity_plus_mending", ConfigType.Boolean) : !(other instanceof InfinityEnchantment));
     }
