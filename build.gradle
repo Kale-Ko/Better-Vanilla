@@ -54,8 +54,33 @@ processResources {
 }
 
 jar.archiveFileName = project.archivesBaseName + "-" + project.version + ".jar"
-jar.destinationDirectory = file("\\")
+jar.destinationDirectory = file("run\\mods")
 
 java {
 	withSourcesJar()
+}
+
+tasks.register("runDevClient", JavaExec) {
+    main = "net.fabricmc.devlaunchinjector.Main"
+    classpath = sourceSets.main.runtimeClasspath
+    workingDir = file("run\\")
+    jvmArgs "-Dfabric.dli.config\u003d${projectDir.path}\\.gradle\\loom-cache\\launch.cfg", "-Dfabric.dli.env\u003dclient", "-Dfabric.dli.main\u003dnet.fabricmc.loader.impl.launch.knot.KnotClient"
+}
+
+tasks.register("runDevServer", JavaExec) {
+    main = "net.fabricmc.devlaunchinjector.Main"
+    classpath = sourceSets.main.runtimeClasspath
+    workingDir = file("run\\")
+    jvmArgs "-Dfabric.dli.config\u003d${projectDir.path}\\.gradle\\loom-cache\\launch.cfg", "-Dfabric.dli.env\u003dserver", "-Dfabric.dli.main\u003dnet.fabricmc.loader.impl.launch.knot.KnotServer"
+    args "nogui"
+}
+
+tasks.register("buildAndRun") {
+    dependsOn tasks.jar
+    dependsOn tasks.runDevClient
+}
+
+tasks.register("buildAndRunServer") {
+    dependsOn tasks.jar
+    dependsOn tasks.runDevServer
 }

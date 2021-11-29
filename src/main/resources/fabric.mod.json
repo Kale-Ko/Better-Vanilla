@@ -1,7 +1,7 @@
 {
     "schemaVersion": 1,
     "name": "Better Vanilla",
-    "id": "better_vanilla",
+    "id": "${mod_id}",
     "version": "${mod_version}",
     "description": "A mod to make the game a bit cooler and more sensible",
     "icon": "assets/${mod_id}/icon.png",
