@@ -14,8 +14,8 @@ public interface GameRendererAccessor {
     MinecraftClient getClient();
 
     @Accessor
-    double getMovementFovMultiplier();
+    float getMovementFovMultiplier();
 
     @Accessor
-    double getLastMovementFovMultiplier();
+    float getLastMovementFovMultiplier();
 }
