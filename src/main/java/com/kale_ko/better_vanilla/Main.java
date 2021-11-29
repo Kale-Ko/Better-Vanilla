@@ -33,6 +33,8 @@ public class Main implements ModInitializer {
     public static final Logger Console = LogManager.getLogger("better_vanilla");
     public static final Config config = new Config();
 
+    public static Boolean zoomed = false;
+
     private static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
         return state -> {
             return (Boolean) state.get(Properties.LIT) ? litLevel : 0;
