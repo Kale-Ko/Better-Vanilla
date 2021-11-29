@@ -8,7 +8,7 @@ import net.minecraft.client.render.GameRenderer;
 @Mixin(GameRenderer.class)
 public interface GameRendererAccessor {
     @Accessor
-    Boolean getRenderingPanorama();
+    boolean getRenderingPanorama();
 
     @Accessor
     MinecraftClient getClient();
