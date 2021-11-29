@@ -91,8 +91,6 @@ public class Main implements ModInitializer {
             zoomKeybind = KeyBindingHelper.registerKeyBinding(new KeyBinding("better_vanilla.keybinds.key.zoom", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_Z, "better_vanilla.keybinds.catogory" ));
 
             ClientTickEvents.END_CLIENT_TICK.register(client -> {
-                Console.debug(zoomKeybind.isPressed());
-
                 zoomed = zoomKeybind.isPressed();
             });
         }
