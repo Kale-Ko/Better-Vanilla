@@ -10,7 +10,9 @@
         "InfinityPlusMending"
     ],
     "client": [
-        "RemoveModdedNotice"
+        "RemoveModdedNotice",
+        "CameraAccessor",
+        "Zoom"
     ],
     "server": [],
     "injectors": {
