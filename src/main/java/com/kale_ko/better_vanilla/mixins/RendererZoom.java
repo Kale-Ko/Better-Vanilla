@@ -15,7 +15,7 @@ import net.minecraft.util.math.MathHelper;
 
 @Mixin(GameRenderer.class)
 public class RendererZoom {
-    @Inject(at = @At("HEAD"), method = "getFov(Lnet/minecraft/client/render/CameraFZ)", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "getFov(Lnet/minecraft/client/render/CameraFZ)D", cancellable = true)
     private void getFov(Camera camera, float f, boolean bl, CallbackInfoReturnable<Double> info) {
         MinecraftClient minecraftClient = ((GameRendererAccessor) ((GameRenderer) ((Object) this))).getClient();
         CameraSubmersionType g;
