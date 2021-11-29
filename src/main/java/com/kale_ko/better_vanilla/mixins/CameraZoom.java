@@ -11,7 +11,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.math.Vec3d;
 
 @Mixin(Camera.class)
-public class Zoom {
+public class CameraZoom {
     @Inject(at = @At("HEAD"), method = "getProjection()Lnet/minecraft/client/render/Camera$Projection;", cancellable = true)
     public void getProjection(CallbackInfoReturnable<Camera.Projection> info) throws Exception {
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
