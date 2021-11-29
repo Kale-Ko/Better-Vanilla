@@ -8,12 +8,16 @@
 package com.kale_ko.better_vanilla;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -23,6 +27,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.registry.DefaultedRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.glfw.GLFW;
 import java.util.function.ToIntFunction;
 import com.kale_ko.better_vanilla.config.Config;
 import com.kale_ko.better_vanilla.config.ConfigCategory;
@@ -34,6 +39,7 @@ public class Main implements ModInitializer {
     public static final Config config = new Config();
 
     public static Boolean zoomed = false;
+    public static KeyBinding zoomKeybind;
 
     private static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
         return state -> {
@@ -52,7 +58,10 @@ public class Main implements ModInitializer {
         config.create(new ConfigKey("bookshelves_hold_books", ConfigCategory.General, ConfigType.Boolean, "true"));
         config.create(new ConfigKey("stonecutters_deal_damage", ConfigCategory.General, ConfigType.Boolean, "true"));
         config.create(new ConfigKey("campfires_set_fire", ConfigCategory.General, ConfigType.Boolean, "true"));
+        config.create(new ConfigKey("zoom_enabled", ConfigCategory.General, ConfigType.Boolean, "true"));
+        config.create(new ConfigKey("zoom_amount", ConfigCategory.General, ConfigType.Number, "4.00"));
         config.create(new ConfigKey("disable_custom_blocks", ConfigCategory.Advanced, ConfigType.Boolean, "false"));
+        config.create(new ConfigKey("disable_custom_keybinds", ConfigCategory.Advanced, ConfigType.Boolean, "false"));
 
         config.load();
 
@@ -76,6 +85,14 @@ public class Main implements ModInitializer {
             DefaultedRegistry.register(DefaultedRegistry.BLOCK, DefaultedRegistry.BLOCK.getRawId(Blocks.SOUL_CAMPFIRE), "soul_campfire", soul_campfire);
             BlockItem soul_campfire_item = new BlockItem(soul_campfire, new Item.Settings().group(ItemGroup.DECORATIONS));
             DefaultedRegistry.register(DefaultedRegistry.ITEM, DefaultedRegistry.ITEM.getRawId(Items.SOUL_CAMPFIRE), "soul_campfire", soul_campfire_item);
+        }
+
+        if (!(Boolean) config.get("disable_custom_keybinds", ConfigType.Boolean)) {
+            zoomKeybind = KeyBindingHelper.registerKeyBinding(new KeyBinding("better_vanilla.keybinds.key.zoom", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_Z, "better_vanilla.keybinds.catogory" ));
+
+            ClientTickEvents.END_CLIENT_TICK.register(client -> {
+                zoomed = zoomKeybind.wasPressed();
+            });
         }
 
         Console.info("Better vanilla has loaded!");
