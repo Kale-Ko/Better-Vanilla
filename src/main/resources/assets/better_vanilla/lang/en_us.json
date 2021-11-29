@@ -21,5 +21,7 @@
     "better_vanilla.config.value.true": "True",
     "better_vanilla.config.value.false": "False",
     "death.attack.cutByStoneCutter": "%1$s was cut to death",
-    "death.attack.cutByStoneCutter.player": "%1$s was cut to death whilst trying to escape %2$s"
+    "death.attack.cutByStoneCutter.player": "%1$s was cut to death whilst trying to escape %2$s",
+    "better_vanilla.keybinds.catogory": "Better Vanilla",
+    "better_vanilla.keybinds.key.zoom": "Zoom"
 }
