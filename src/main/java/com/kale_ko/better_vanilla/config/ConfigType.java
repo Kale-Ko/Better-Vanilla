@@ -8,5 +8,5 @@
 package com.kale_ko.better_vanilla.config;
 
 public enum ConfigType {
-    String, Number, Boolean
+    String, Float, Double, Boolean
 }

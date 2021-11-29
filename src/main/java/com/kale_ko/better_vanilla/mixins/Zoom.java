@@ -22,13 +22,12 @@ public class Zoom {
         Vec3d vec3d2 = new Vec3d(((CameraAccessor) ((Camera) ((Object) this))).getDiagonalPlane()).multiply(f);
         Vec3d vec3d3 = new Vec3d(((CameraAccessor) ((Camera) ((Object) this))).getVerticalPlane()).multiply(e);
 
-        info.setReturnValue(
-                (Camera.Projection) Camera.Projection.class.getConstructors()[0].newInstance(vec3d, vec3d2, vec3d3));
+        info.setReturnValue((Camera.Projection) Camera.Projection.class.getConstructors()[0].newInstance(vec3d, vec3d2, vec3d3));
     }
 
     public double getZoom() {
         if ((Boolean) Main.config.get("zoom_enabled", ConfigType.Boolean) && Main.zoomed) {
-            return (double) Main.config.get("zoom_amount", ConfigType.Number);
+            return (double) Main.config.get("zoom_amount", ConfigType.Double);
         } else {
             return 1d;
         }
