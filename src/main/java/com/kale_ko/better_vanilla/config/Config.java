@@ -144,7 +144,7 @@ public class Config {
                         .setDefaultValue(Float.parseFloat((String) kvp.key.defaultValue))
                         .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.key.id + ".description"))
                         .setSaveConsumer(value -> {
-                            configRegistry.set(configRegistry.indexOf(kvp), new ConfigPair(kvp.key, value));
+                            configRegistry.set(configRegistry.indexOf(kvp), new ConfigPair(kvp.key, value.toString()));
 
                             save();
                         })
@@ -163,7 +163,7 @@ public class Config {
                         .setDefaultValue(Double.parseDouble((String) kvp.key.defaultValue))
                         .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.key.id + ".description"))
                         .setSaveConsumer(value -> {
-                            configRegistry.set(configRegistry.indexOf(kvp), new ConfigPair(kvp.key, value));
+                            configRegistry.set(configRegistry.indexOf(kvp), new ConfigPair(kvp.key, value.toString()));
 
                             save();
                         })
@@ -185,7 +185,7 @@ public class Config {
                             return new TranslatableText("better_vanilla.config.value." + value.toString());
                         })
                         .setSaveConsumer(value -> {
-                            configRegistry.set(configRegistry.indexOf(kvp), new ConfigPair(kvp.key, value));
+                            configRegistry.set(configRegistry.indexOf(kvp), new ConfigPair(kvp.key, value.toString()));
 
                             save();
                         })
