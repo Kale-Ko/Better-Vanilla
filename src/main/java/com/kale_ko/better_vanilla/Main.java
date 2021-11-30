@@ -60,40 +60,34 @@ public class Main implements ModInitializer {
         config.create(new ConfigKey("campfires_set_fire", ConfigCategory.General, ConfigType.Boolean, "true"));
         config.create(new ConfigKey("zoom_enabled", ConfigCategory.General, ConfigType.Boolean, "true"));
         config.create(new ConfigKey("zoom_amount", ConfigCategory.General, ConfigType.Double, "4.00"));
-        config.create(new ConfigKey("disable_custom_blocks", ConfigCategory.Advanced, ConfigType.Boolean, "false"));
-        config.create(new ConfigKey("disable_custom_keybinds", ConfigCategory.Advanced, ConfigType.Boolean, "false"));
 
         config.load();
 
-        if (!(Boolean) config.get("disable_custom_blocks", ConfigType.Boolean)) {
-            Block bookshelf = new BookshelfBlock(AbstractBlock.Settings.of(Material.WOOD).strength(1.5F).sounds(BlockSoundGroup.WOOD));
-            DefaultedRegistry.register(DefaultedRegistry.BLOCK, DefaultedRegistry.BLOCK.getRawId(Blocks.BOOKSHELF), "bookshelf", bookshelf);
-            BlockItem bookshelf_item = new BlockItem(bookshelf, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
-            DefaultedRegistry.register(DefaultedRegistry.ITEM, DefaultedRegistry.ITEM.getRawId(Items.BOOKSHELF), "bookshelf", bookshelf_item);
+        Block bookshelf = new BookshelfBlock(AbstractBlock.Settings.of(Material.WOOD).strength(1.5F).sounds(BlockSoundGroup.WOOD));
+        DefaultedRegistry.register(DefaultedRegistry.BLOCK, DefaultedRegistry.BLOCK.getRawId(Blocks.BOOKSHELF), "bookshelf", bookshelf);
+        BlockItem bookshelf_item = new BlockItem(bookshelf, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
+        DefaultedRegistry.register(DefaultedRegistry.ITEM, DefaultedRegistry.ITEM.getRawId(Items.BOOKSHELF),"bookshelf", bookshelf_item);
 
-            Block stonecutter = new DamagingStonecutterBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.5F));
-            DefaultedRegistry.register(DefaultedRegistry.BLOCK, DefaultedRegistry.BLOCK.getRawId(Blocks.STONECUTTER), "stonecutter", stonecutter);
-            BlockItem stonecutter_item = new BlockItem(stonecutter, new Item.Settings().group(ItemGroup.DECORATIONS));
-            DefaultedRegistry.register(DefaultedRegistry.ITEM, DefaultedRegistry.ITEM.getRawId(Items.STONECUTTER), "stonecutter", stonecutter_item);
+        Block stonecutter = new DamagingStonecutterBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.5F));
+        DefaultedRegistry.register(DefaultedRegistry.BLOCK, DefaultedRegistry.BLOCK.getRawId(Blocks.STONECUTTER), "stonecutter", stonecutter);
+        BlockItem stonecutter_item = new BlockItem(stonecutter, new Item.Settings().group(ItemGroup.DECORATIONS));
+        DefaultedRegistry.register(DefaultedRegistry.ITEM, DefaultedRegistry.ITEM.getRawId(Items.STONECUTTER), "stonecutter", stonecutter_item);
 
-            Block campfire = new BurringCampFireBlock(true, AbstractBlock.Settings.of(Material.WOOD, MapColor.SPRUCE_BROWN).strength(2.0F).sounds(BlockSoundGroup.WOOD).luminance(createLightLevelFromLitBlockState(15)).nonOpaque());
-            DefaultedRegistry.register(DefaultedRegistry.BLOCK, DefaultedRegistry.BLOCK.getRawId(Blocks.CAMPFIRE), "campfire", campfire);
-            BlockItem campfire_item = new BlockItem(campfire, new Item.Settings().group(ItemGroup.DECORATIONS));
-            DefaultedRegistry.register(DefaultedRegistry.ITEM, DefaultedRegistry.ITEM.getRawId(Items.CAMPFIRE), "campfire", campfire_item);
+        Block campfire = new BurringCampFireBlock(true, AbstractBlock.Settings.of(Material.WOOD, MapColor.SPRUCE_BROWN).strength(2.0F).sounds(BlockSoundGroup.WOOD).luminance(createLightLevelFromLitBlockState(15)).nonOpaque());
+        DefaultedRegistry.register(DefaultedRegistry.BLOCK, DefaultedRegistry.BLOCK.getRawId(Blocks.CAMPFIRE), "campfire", campfire);
+        BlockItem campfire_item = new BlockItem(campfire, new Item.Settings().group(ItemGroup.DECORATIONS));
+        DefaultedRegistry.register(DefaultedRegistry.ITEM, DefaultedRegistry.ITEM.getRawId(Items.CAMPFIRE), "campfire", campfire_item);
 
-            Block soul_campfire = new BurringCampFireBlock(false, AbstractBlock.Settings.of(Material.WOOD, MapColor.SPRUCE_BROWN).strength(2.0F).sounds(BlockSoundGroup.WOOD).luminance(createLightLevelFromLitBlockState(10)).nonOpaque());
-            DefaultedRegistry.register(DefaultedRegistry.BLOCK, DefaultedRegistry.BLOCK.getRawId(Blocks.SOUL_CAMPFIRE), "soul_campfire", soul_campfire);
-            BlockItem soul_campfire_item = new BlockItem(soul_campfire, new Item.Settings().group(ItemGroup.DECORATIONS));
-            DefaultedRegistry.register(DefaultedRegistry.ITEM, DefaultedRegistry.ITEM.getRawId(Items.SOUL_CAMPFIRE), "soul_campfire", soul_campfire_item);
-        }
+        Block soul_campfire = new BurringCampFireBlock(false, AbstractBlock.Settings.of(Material.WOOD, MapColor.SPRUCE_BROWN).strength(2.0F).sounds(BlockSoundGroup.WOOD).luminance(createLightLevelFromLitBlockState(10)).nonOpaque());
+        DefaultedRegistry.register(DefaultedRegistry.BLOCK, DefaultedRegistry.BLOCK.getRawId(Blocks.SOUL_CAMPFIRE), "soul_campfire", soul_campfire);
+        BlockItem soul_campfire_item = new BlockItem(soul_campfire, new Item.Settings().group(ItemGroup.DECORATIONS));
+        DefaultedRegistry.register(DefaultedRegistry.ITEM, DefaultedRegistry.ITEM.getRawId(Items.SOUL_CAMPFIRE), "soul_campfire", soul_campfire_item);
 
-        if (!(Boolean) config.get("disable_custom_keybinds", ConfigType.Boolean)) {
-            zoomKeybind = KeyBindingHelper.registerKeyBinding(new KeyBinding("better_vanilla.keybinds.key.zoom", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_Z, "better_vanilla.keybinds.catogory" ));
+        zoomKeybind = KeyBindingHelper.registerKeyBinding(new KeyBinding("better_vanilla.keybinds.key.zoom", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_Z, "better_vanilla.keybinds.catogory"));
 
-            ClientTickEvents.END_CLIENT_TICK.register(client -> {
-                zoomed = zoomKeybind.isPressed();
-            });
-        }
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            zoomed = zoomKeybind.isPressed();
+        });
 
         Console.info("Better vanilla has loaded!");
     }
