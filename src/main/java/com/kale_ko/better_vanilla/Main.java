@@ -35,7 +35,11 @@ import com.kale_ko.better_vanilla.config.ConfigKey;
 import com.kale_ko.better_vanilla.config.ConfigType;
 
 public class Main implements ModInitializer {
+<<<<<<< HEAD
     public static final String MOD_ID = "@gradle_replace#mod_id@";
+=======
+    public static final String MOD_ID = "${mod_id}";
+>>>>>>> eeda29e1909bed9fe5ce2e3c3bda760a03f28edd
     public static final Logger Console = LogManager.getLogger(MOD_ID);
     public static final Config config = new Config();
 
