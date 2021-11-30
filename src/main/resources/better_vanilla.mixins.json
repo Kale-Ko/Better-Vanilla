@@ -4,6 +4,7 @@
     "package": "com.kale_ko.${mod_id}.mixins",
     "compatibilityLevel": "JAVA_16",
     "mixins": [
+        "CreeperEntityAccessor",
         "Creeper",
         "CreeperIgniteGoalAccessor",
         "CreeperIgniteDefuse",
@@ -11,8 +12,10 @@
     ],
     "client": [
         "RemoveModdedNotice",
+        "GameRendererAccessor",
+        "RendererZoom",
         "CameraAccessor",
-        "Zoom"
+        "CameraZoom"
     ],
     "server": [],
     "injectors": {
