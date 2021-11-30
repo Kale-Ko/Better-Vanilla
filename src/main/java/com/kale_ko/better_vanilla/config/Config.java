@@ -20,8 +20,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -34,7 +32,7 @@ public class Config {
     public static int configKeys = 0;
 
     public void create(ConfigKey config) {
-        configRegistry.add(new ConfigPair(config, config.defaultValue));
+        configRegistry.add(new ConfigPair(config, config.defaultValue.toString()));
     }
 
     public Object get(String id, ConfigType type) {
@@ -126,8 +124,6 @@ public class Config {
                         .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.key.id + ".description"))
                         .setSaveConsumer(value -> {
                             configRegistry.set(configRegistry.indexOf(kvp), new ConfigPair(kvp.key, value));
-
-                            save();
                         })
                         .build();
 
@@ -145,8 +141,6 @@ public class Config {
                         .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.key.id + ".description"))
                         .setSaveConsumer(value -> {
                             configRegistry.set(configRegistry.indexOf(kvp), new ConfigPair(kvp.key, value.toString()));
-
-                            save();
                         })
                         .build();
 
@@ -164,8 +158,6 @@ public class Config {
                         .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.key.id + ".description"))
                         .setSaveConsumer(value -> {
                             configRegistry.set(configRegistry.indexOf(kvp), new ConfigPair(kvp.key, value.toString()));
-
-                            save();
                         })
                         .build();
 
@@ -186,8 +178,6 @@ public class Config {
                         })
                         .setSaveConsumer(value -> {
                             configRegistry.set(configRegistry.indexOf(kvp), new ConfigPair(kvp.key, value.toString()));
-
-                            save();
                         })
                         .build();
 
@@ -210,20 +200,16 @@ public class Config {
                 })
                 .setSaveConsumer(value -> {
                     if (value) {
-                        try {
-                            Files.delete(Path.of(configFile.getPath()));
-
-                            configRegistry.clear();
-                        } catch (IOException err) {
-                            Main.Console.error("Failed to delete config");
+                        for (ConfigPair kvp : configRegistry) {
+                            configRegistry.set(configRegistry.indexOf(kvp), new ConfigPair(kvp.key, kvp.key.defaultValue));
                         }
                     }
                 })
                 .build();
 
-        reset_all_entry.setRequiresRestart(true);
         advanced.addEntry(reset_all_entry);
 
+        builder.setSavingRunnable(this::save);
         builder.setFallbackCategory(general);
 
         return builder;
