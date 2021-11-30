@@ -20,6 +20,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -99,7 +101,7 @@ public class Config {
 
                 for (ConfigPair kvp : configRegistry) {
                     if (keyValue[0].equalsIgnoreCase(kvp.key.id)) {
-                        configRegistry.add(new ConfigPair(kvp.key, keyValue[1]));
+                        configRegistry.set(configRegistry.indexOf(kvp), new ConfigPair(kvp.key, keyValue[1]));
                     }
                 }
             }
@@ -123,8 +125,7 @@ public class Config {
                         .setDefaultValue((String) kvp.key.defaultValue)
                         .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.key.id + ".description"))
                         .setSaveConsumer(value -> {
-                            configRegistry.remove(kvp);
-                            configRegistry.add(new ConfigPair(kvp.key, value));
+                            configRegistry.set(configRegistry.indexOf(kvp), new ConfigPair(kvp.key, value));
 
                             save();
                         })
@@ -143,8 +144,7 @@ public class Config {
                         .setDefaultValue(Float.parseFloat((String) kvp.key.defaultValue))
                         .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.key.id + ".description"))
                         .setSaveConsumer(value -> {
-                            configRegistry.remove(kvp);
-                            configRegistry.add(new ConfigPair(kvp.key, value));
+                            configRegistry.set(configRegistry.indexOf(kvp), new ConfigPair(kvp.key, value));
 
                             save();
                         })
@@ -163,8 +163,7 @@ public class Config {
                         .setDefaultValue(Double.parseDouble((String) kvp.key.defaultValue))
                         .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.key.id + ".description"))
                         .setSaveConsumer(value -> {
-                            configRegistry.remove(kvp);
-                            configRegistry.add(new ConfigPair(kvp.key, value));
+                            configRegistry.set(configRegistry.indexOf(kvp), new ConfigPair(kvp.key, value));
 
                             save();
                         })
@@ -186,8 +185,7 @@ public class Config {
                             return new TranslatableText("better_vanilla.config.value." + value.toString());
                         })
                         .setSaveConsumer(value -> {
-                            configRegistry.remove(kvp);
-                            configRegistry.add(new ConfigPair(kvp.key, value));
+                            configRegistry.set(configRegistry.indexOf(kvp), new ConfigPair(kvp.key, value));
 
                             save();
                         })
@@ -202,6 +200,29 @@ public class Config {
                 }
             }
         }
+
+        BooleanListEntry reset_all_entry = builder.entryBuilder()
+                .startBooleanToggle(new TranslatableText("better_vanilla.config.option.reset_all.title"), false)
+                .setDefaultValue(false)
+                .setTooltip(new TranslatableText("better_vanilla.config.option.reset_all.description"))
+                .setYesNoTextSupplier((Boolean value) -> {
+                    return new TranslatableText("better_vanilla.config.value." + value.toString());
+                })
+                .setSaveConsumer(value -> {
+                    if (value) {
+                        try {
+                            Files.delete(Path.of(configFile.getPath()));
+
+                            configRegistry.clear();
+                        } catch (IOException err) {
+                            Main.Console.error("Failed to delete config");
+                        }
+                    }
+                })
+                .build();
+
+        reset_all_entry.setRequiresRestart(true);
+        advanced.addEntry(reset_all_entry);
 
         builder.setFallbackCategory(general);
 
