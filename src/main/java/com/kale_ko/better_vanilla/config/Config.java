@@ -20,27 +20,28 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Config {
     public static final String version = "2";
 
     public static final File configFile = FabricLoader.getInstance().getConfigDir().resolve("better_vanilla.config").toFile();
 
-    private Map<ConfigKey, Object> configRegistry = new HashMap<ConfigKey, Object>();
+    private List<ConfigPair> configRegistry = new ArrayList<ConfigPair>();
+    public static int configKeys = 0;
 
     public void create(ConfigKey config) {
-        configRegistry.put(config, config.defaultValue);
+        configRegistry.add(new ConfigPair(config, config.defaultValue));
     }
 
     public Object get(String id, ConfigType type) {
-        for (Map.Entry<ConfigKey, Object> kvp : configRegistry.entrySet()) {
-            if (kvp.getKey().id.equalsIgnoreCase(id)) {
-                if (type == ConfigType.String) return kvp.getValue();
-                else if (type == ConfigType.Float) return Float.parseFloat((String)kvp.getValue());
-                else if (type == ConfigType.Double) return Double.parseDouble((String)kvp.getValue());
-                else if (type == ConfigType.Boolean) return Boolean.parseBoolean((String)kvp.getValue());
+        for (ConfigPair kvp : configRegistry) {
+            if (kvp.key.id.equalsIgnoreCase(id)) {
+                if (type == ConfigType.String) return kvp.value;
+                else if (type == ConfigType.Float) return Float.parseFloat((String)kvp.value);
+                else if (type == ConfigType.Double) return Double.parseDouble((String)kvp.value);
+                else if (type == ConfigType.Boolean) return Boolean.parseBoolean((String)kvp.value);
             }
         }
 
@@ -52,8 +53,8 @@ public class Config {
 
         StringBuilder data = new StringBuilder("version=" + version + "\n");
 
-        for (Map.Entry<ConfigKey, Object> kvp : configRegistry.entrySet()) {
-            data.append(kvp.getKey().id + "=" + kvp.getValue().toString() + "\n");
+        for (ConfigPair kvp : configRegistry) {
+            data.append(kvp.key.id + "=" + kvp.value.toString() + "\n");
         }
 
         try {
@@ -96,9 +97,9 @@ public class Config {
             for (String line : lines) {
                 String[] keyValue = line.split("=");
 
-                for (Map.Entry<ConfigKey, Object> kvp : configRegistry.entrySet()) {
-                    if (keyValue[0].equalsIgnoreCase(kvp.getKey().id)) {
-                        configRegistry.put(kvp.getKey(), keyValue[1]);
+                for (ConfigPair kvp : configRegistry) {
+                    if (keyValue[0].equalsIgnoreCase(kvp.key.id)) {
+                        configRegistry.add(new ConfigPair(kvp.key, keyValue[1]));
                     }
                 }
             }
@@ -115,85 +116,86 @@ public class Config {
         ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("better_vanilla.config.category.general"));
         ConfigCategory advanced = builder.getOrCreateCategory(new TranslatableText("better_vanilla.config.category.advanced"));
 
-        for (Map.Entry<ConfigKey, Object> kvp : configRegistry.entrySet()) {
-            if (kvp.getKey().type == ConfigType.String) {
+        for (ConfigPair kvp : configRegistry) {
+            if (kvp.key.type == ConfigType.String) {
                 StringListEntry entry = builder.entryBuilder()
-                        .startStrField(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".title"), (String) kvp.getValue())
-                        .setDefaultValue((String) kvp.getKey().defaultValue)
-                        .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".description"))
+                        .startStrField(new TranslatableText("better_vanilla.config.option." + kvp.key.id + ".title"), (String) kvp.value)
+                        .setDefaultValue((String) kvp.key.defaultValue)
+                        .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.key.id + ".description"))
                         .setSaveConsumer(value -> {
-                            configRegistry.remove(kvp.getKey());
-                            configRegistry.put(kvp.getKey(), value);
+                            configRegistry.remove(kvp);
+                            configRegistry.add(new ConfigPair(kvp.key, value));
 
                             save();
                         })
                         .build();
 
-                if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.General) {
+                if (kvp.key.category == com.kale_ko.better_vanilla.config.ConfigCategory.General) {
                     general.addEntry(entry);
-                } else if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.Advanced) {
+                } else if (kvp.key.category == com.kale_ko.better_vanilla.config.ConfigCategory.Advanced) {
                     entry.setRequiresRestart(true);
 
                     advanced.addEntry(entry);
                 }
-            } else if (kvp.getKey().type == ConfigType.Float) {
+            } else if (kvp.key.type == ConfigType.Float) {
                 FloatListEntry entry = builder.entryBuilder()
-                        .startFloatField(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".title"), Float.parseFloat((String) kvp.getValue()))
-                        .setDefaultValue(Float.parseFloat((String) kvp.getKey().defaultValue))
-                        .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".description"))
+                        .startFloatField(new TranslatableText("better_vanilla.config.option." + kvp.key.id + ".title"), Float.parseFloat((String) kvp.value))
+                        .setDefaultValue(Float.parseFloat((String) kvp.key.defaultValue))
+                        .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.key.id + ".description"))
                         .setSaveConsumer(value -> {
-                            configRegistry.remove(kvp.getKey());
-                            configRegistry.put(kvp.getKey(), value.toString());
+                            configRegistry.remove(kvp);
+                            configRegistry.add(new ConfigPair(kvp.key, value));
 
                             save();
                         })
                         .build();
 
-                if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.General) {
+                if (kvp.key.category == com.kale_ko.better_vanilla.config.ConfigCategory.General) {
                     general.addEntry(entry);
-                } else if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.Advanced) {
+                } else if (kvp.key.category == com.kale_ko.better_vanilla.config.ConfigCategory.Advanced) {
                     entry.setRequiresRestart(true);
 
                     advanced.addEntry(entry);
                 }
-            } else if (kvp.getKey().type == ConfigType.Double) {
+            } else if (kvp.key.type == ConfigType.Double) {
                 DoubleListEntry entry = builder.entryBuilder()
-                        .startDoubleField(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".title"), Double.parseDouble((String) kvp.getValue()))
-                        .setDefaultValue(Double.parseDouble((String) kvp.getKey().defaultValue))
-                        .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".description"))
+                        .startDoubleField(new TranslatableText("better_vanilla.config.option." + kvp.key.id + ".title"), Double.parseDouble((String) kvp.value))
+                        .setDefaultValue(Double.parseDouble((String) kvp.key.defaultValue))
+                        .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.key.id + ".description"))
                         .setSaveConsumer(value -> {
-                            configRegistry.remove(kvp.getKey());
-                            configRegistry.put(kvp.getKey(), value.toString());
+                            configRegistry.remove(kvp);
+                            configRegistry.add(new ConfigPair(kvp.key, value));
 
                             save();
                         })
                         .build();
 
-                if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.General) {
+                if (kvp.key.category == com.kale_ko.better_vanilla.config.ConfigCategory.General) {
                     general.addEntry(entry);
-                } else if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.Advanced) {
+                } else if (kvp.key.category == com.kale_ko.better_vanilla.config.ConfigCategory.Advanced) {
                     entry.setRequiresRestart(true);
 
                     advanced.addEntry(entry);
                 }
-            } else if (kvp.getKey().type == ConfigType.Boolean) {
+            } else if (kvp.key.type == ConfigType.Boolean) {
                 BooleanListEntry entry = builder.entryBuilder()
-                        .startBooleanToggle(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".title"), Boolean.parseBoolean((String) kvp.getValue()))
-                        .setDefaultValue(Boolean.parseBoolean((String) kvp.getKey().defaultValue))
-                        .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.getKey().id + ".description"))
+                        .startBooleanToggle(new TranslatableText("better_vanilla.config.option." + kvp.key.id + ".title"), Boolean.parseBoolean((String) kvp.value))
+                        .setDefaultValue(Boolean.parseBoolean((String) kvp.key.defaultValue))
+                        .setTooltip(new TranslatableText("better_vanilla.config.option." + kvp.key.id + ".description"))
                         .setYesNoTextSupplier((Boolean value) -> {
                             return new TranslatableText("better_vanilla.config.value." + value.toString());
                         })
                         .setSaveConsumer(value -> {
-                            configRegistry.put(kvp.getKey(), value.toString());
+                            configRegistry.remove(kvp);
+                            configRegistry.add(new ConfigPair(kvp.key, value));
 
                             save();
                         })
                         .build();
 
-                if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.General) {
+                if (kvp.key.category == com.kale_ko.better_vanilla.config.ConfigCategory.General) {
                     general.addEntry(entry);
-                } else if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.Advanced) {
+                } else if (kvp.key.category == com.kale_ko.better_vanilla.config.ConfigCategory.Advanced) {
                     entry.setRequiresRestart(true);
 
                     advanced.addEntry(entry);
