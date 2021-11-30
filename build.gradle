@@ -53,8 +53,10 @@ processResources {
     }
 }
 
-jar.archiveFileName = project.archivesBaseName + "-" + project.version + ".jar"
-jar.destinationDirectory = file("run\\mods")
+jar {
+	archiveFileName = project.archivesBaseName + "-" + project.version + ".jar"
+    destinationDirectory = file("run\\mods")
+}
 
 java {
 	withSourcesJar()
