@@ -132,6 +132,8 @@ public class Config {
                 if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.General) {
                     general.addEntry(entry);
                 } else if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.Advanced) {
+                    entry.setRequiresRestart(true);
+
                     advanced.addEntry(entry);
                 }
             } else if (kvp.getKey().type == ConfigType.Float) {
@@ -150,6 +152,8 @@ public class Config {
                 if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.General) {
                     general.addEntry(entry);
                 } else if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.Advanced) {
+                    entry.setRequiresRestart(true);
+
                     advanced.addEntry(entry);
                 }
             } else if (kvp.getKey().type == ConfigType.Double) {
@@ -168,6 +172,8 @@ public class Config {
                 if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.General) {
                     general.addEntry(entry);
                 } else if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.Advanced) {
+                    entry.setRequiresRestart(true);
+
                     advanced.addEntry(entry);
                 }
             } else if (kvp.getKey().type == ConfigType.Boolean) {
@@ -188,6 +194,8 @@ public class Config {
                 if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.General) {
                     general.addEntry(entry);
                 } else if (kvp.getKey().category == com.kale_ko.better_vanilla.config.ConfigCategory.Advanced) {
+                    entry.setRequiresRestart(true);
+
                     advanced.addEntry(entry);
                 }
             }
