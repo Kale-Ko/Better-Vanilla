@@ -13,9 +13,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.util.ModStatus;
 
-@Mixin(MinecraftClient.class)
+@Mixin(ModStatus.class)
 public class RemoveModdedNotice {
     @Inject(at = @At("HEAD"), method = "isModded()Z", cancellable = true)
     public void isModded(CallbackInfoReturnable<Boolean> info) {
