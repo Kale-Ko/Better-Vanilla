@@ -49,7 +49,8 @@ processResources {
     }
 
     filesMatching("better_vanilla.mixins.json") {
-        expand "mod_id": project.mod_id
+        expand "mod_id": project.mod_id,
+        "java_version": project.java_version
     }
 }
 
