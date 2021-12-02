@@ -15,7 +15,7 @@
                             "conditions": [
                                 {
                                     "condition": "minecraft:block_state_property",
-                                    "block": "minecraft:bookshelf",
+                                    "block": "better_vanilla:bookshelf",
                                     "properties": {
                                         "books": "3"
                                     }
@@ -29,7 +29,7 @@
                             "conditions": [
                                 {
                                     "condition": "minecraft:block_state_property",
-                                    "block": "minecraft:bookshelf",
+                                    "block": "better_vanilla:bookshelf",
                                     "properties": {
                                         "books": "2"
                                     }
@@ -43,7 +43,7 @@
                             "conditions": [
                                 {
                                     "condition": "minecraft:block_state_property",
-                                    "block": "minecraft:bookshelf",
+                                    "block": "better_vanilla:bookshelf",
                                     "properties": {
                                         "books": "1"
                                     }
@@ -57,7 +57,7 @@
                             "conditions": [
                                 {
                                     "condition": "minecraft:block_state_property",
-                                    "block": "minecraft:bookshelf",
+                                    "block": "better_vanilla:bookshelf",
                                     "properties": {
                                         "books": "0"
                                     }
