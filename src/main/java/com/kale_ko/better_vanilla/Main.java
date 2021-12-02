@@ -24,7 +24,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.registry.DefaultedRegistry;
+import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
@@ -65,26 +65,26 @@ public class Main implements ModInitializer {
         config.load();
 
         Block bookshelf = new BookshelfBlock(AbstractBlock.Settings.of(Material.WOOD).strength(1.5F).sounds(BlockSoundGroup.WOOD));
-        DefaultedRegistry.register(DefaultedRegistry.BLOCK, DefaultedRegistry.BLOCK.getRawId(Blocks.BOOKSHELF), "bookshelf", bookshelf);
+        Registry.register(Registry.BLOCK, Registry.BLOCK.getRawId(Blocks.BOOKSHELF), MOD_ID + ":bookshelf", bookshelf);
         BlockItem bookshelf_item = new BlockItem(bookshelf, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS));
-        DefaultedRegistry.register(DefaultedRegistry.ITEM, DefaultedRegistry.ITEM.getRawId(Items.BOOKSHELF),"bookshelf", bookshelf_item);
+        Registry.register(Registry.ITEM, Registry.ITEM.getRawId(Items.BOOKSHELF), MOD_ID + ":bookshelf", bookshelf_item);
 
         Block stonecutter = new DamagingStonecutterBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool().strength(3.5F));
-        DefaultedRegistry.register(DefaultedRegistry.BLOCK, DefaultedRegistry.BLOCK.getRawId(Blocks.STONECUTTER), "stonecutter", stonecutter);
+        Registry.register(Registry.BLOCK, Registry.BLOCK.getRawId(Blocks.STONECUTTER), MOD_ID + ":stonecutter", stonecutter);
         BlockItem stonecutter_item = new BlockItem(stonecutter, new Item.Settings().group(ItemGroup.DECORATIONS));
-        DefaultedRegistry.register(DefaultedRegistry.ITEM, DefaultedRegistry.ITEM.getRawId(Items.STONECUTTER), "stonecutter", stonecutter_item);
+        Registry.register(Registry.ITEM, Registry.ITEM.getRawId(Items.STONECUTTER), MOD_ID + ":stonecutter", stonecutter_item);
 
         Block campfire = new BurringCampFireBlock(true, AbstractBlock.Settings.of(Material.WOOD, MapColor.SPRUCE_BROWN).strength(2.0F).sounds(BlockSoundGroup.WOOD).luminance(createLightLevelFromLitBlockState(15)).nonOpaque());
-        DefaultedRegistry.register(DefaultedRegistry.BLOCK, DefaultedRegistry.BLOCK.getRawId(Blocks.CAMPFIRE), "campfire", campfire);
+        Registry.register(Registry.BLOCK, Registry.BLOCK.getRawId(Blocks.CAMPFIRE), MOD_ID + ":campfire", campfire);
         BlockItem campfire_item = new BlockItem(campfire, new Item.Settings().group(ItemGroup.DECORATIONS));
-        DefaultedRegistry.register(DefaultedRegistry.ITEM, DefaultedRegistry.ITEM.getRawId(Items.CAMPFIRE), "campfire", campfire_item);
+        Registry.register(Registry.ITEM, Registry.ITEM.getRawId(Items.CAMPFIRE), MOD_ID + ":campfire", campfire_item);
 
         Block soul_campfire = new BurringCampFireBlock(false, AbstractBlock.Settings.of(Material.WOOD, MapColor.SPRUCE_BROWN).strength(2.0F).sounds(BlockSoundGroup.WOOD).luminance(createLightLevelFromLitBlockState(10)).nonOpaque());
-        DefaultedRegistry.register(DefaultedRegistry.BLOCK, DefaultedRegistry.BLOCK.getRawId(Blocks.SOUL_CAMPFIRE), "soul_campfire", soul_campfire);
+        Registry.register(Registry.BLOCK, Registry.BLOCK.getRawId(Blocks.SOUL_CAMPFIRE), MOD_ID + ":soul_campfire", soul_campfire);
         BlockItem soul_campfire_item = new BlockItem(soul_campfire, new Item.Settings().group(ItemGroup.DECORATIONS));
-        DefaultedRegistry.register(DefaultedRegistry.ITEM, DefaultedRegistry.ITEM.getRawId(Items.SOUL_CAMPFIRE), "soul_campfire", soul_campfire_item);
+        Registry.register(Registry.ITEM, Registry.ITEM.getRawId(Items.SOUL_CAMPFIRE), MOD_ID + ":soul_campfire", soul_campfire_item);
 
-        zoomKeybind = KeyBindingHelper.registerKeyBinding(new KeyBinding("better_vanilla.keybinds.key.zoom", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_Z, "better_vanilla.keybinds.catogory"));
+        zoomKeybind = KeyBindingHelper.registerKeyBinding(new KeyBinding(MOD_ID + ".keybinds.key.zoom", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_Z, MOD_ID + ".keybinds.catogory"));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             zoomed = zoomKeybind.isPressed();
