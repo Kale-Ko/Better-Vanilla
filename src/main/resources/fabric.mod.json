@@ -39,13 +39,13 @@
     ],
     "jars": [
         {
-            "file": "META-INF/jars/fabric-api-${fabric_api_version}+${mod_compatibility}.jar"
+            "file": "META-INF/jars/fabric-${fabric_api_version}.jar"
         },
         {
             "file": "META-INF/jars/modmenu-${modmenu_version}.jar"
         },
         {
-            "file": "META-INF/jars/cloth-config-${cloth_config_version}-fabric.jar"
+            "file": "META-INF/jars/cloth-config2-${cloth_config_version}.jar"
         }
     ],
     "depends": {
